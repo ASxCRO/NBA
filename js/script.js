@@ -138,14 +138,17 @@ window.addEventListener("load", function(){
         }
       });
       var Redak='<tr>';
-      var table = $('#games-score').DataTable();
+      var table = $('#games-score').DataTable( {
+        "responsive": true
+      });
       table.clear();
       FiltrirajUtakmice();
       FiltrirajIgraceKluba(1);
 
       
     
-    $('.modal-header').css('background','url(https://www.nba.com/assets/logos/teams/primary/web/'+team.teamSitesOnly.teamTricode+'.svg) no-repeat center right')
+    $('#clubLogo').attr('src','https://www.nba.com/assets/logos/teams/primary/web/'+team.teamSitesOnly.teamTricode+'.svg');
+    $('#clubLogo').attr('title', team.teamSitesOnly.teamKey+' '+team.teamSitesOnly.teamNickname);
 
     $('#profilKlubaModal').modal();
   });
@@ -153,7 +156,7 @@ window.addEventListener("load", function(){
   $(document).delegate('#prikaziProfilIgracaBtn', 'click', function()
   {
       playerId = $(this).attr('personid');
-      $('.modal-header').css('background','url(https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/'+playerId+'.png) no-repeat center right');
+      // $('.modal-header').css('background','url(https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/'+playerId+'.png) no-repeat center right');
       players.forEach(player => {
         if(player.personId == playerId)
         {
@@ -161,8 +164,10 @@ window.addEventListener("load", function(){
           NBAfranchise.forEach(club => {
             if(club.teamId == player.teamId)
             {
-              $('h5#klubIgracaLabel').text(club.fullName);
-              $('#clubLogo').attr('src','https://www.nba.com/assets/logos/teams/primary/web/'+club.tricode+'.svg')
+              $('#clubLogo').attr('src','https://www.nba.com/assets/logos/teams/primary/web/'+club.tricode+'.svg');
+              $('#clubLogo').attr('title', club.fullName);
+              $('#playerImage').attr('src','https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/'+playerId+'.png');
+              $('#playerImage').attr('title', player.firstName + ' ' + player.lastName);
 
             }
           
@@ -182,7 +187,14 @@ window.addEventListener("load", function(){
 
 function FiltrirajUtakmice()
 {
-	table = $('#games-score').DataTable();
+  if ( $.fn.dataTable.isDataTable( '#games-score' )  ) {  
+    table = $('#games-score').DataTable();
+  }
+  else {
+    table = $('#games-score').DataTable( {
+      "responsive": true
+    });
+  }
 
   table.clear();
   var trazenaGodina = $('#dpdnGodina').val();
@@ -228,8 +240,23 @@ function FiltrirajUtakmice()
 var players = [];
 function FiltrirajIgraceKluba(broj)
 {
-  var tablePlayers = $('#club-players').DataTable();
-  var tablePlayersScore = $('#player-score').DataTable();
+  if ( $.fn.dataTable.isDataTable( '#club-players' )  ) {  
+    var tablePlayers = $('#club-players').DataTable();
+  }
+  else {
+    var tablePlayers = $('#club-players').DataTable( {
+      "responsive": true
+    });
+  }
+  if ( $.fn.dataTable.isDataTable( '#player-score' )  ) {  
+    var tablePlayersScore = $('#player-score').DataTable();
+  }
+  else {
+    var tablePlayersScore = $('#player-score').DataTable( {
+      "responsive": true
+    });
+  }
+ 
   tablePlayers.clear();
   tablePlayersScore.clear();
 
@@ -257,7 +284,7 @@ function FiltrirajIgraceKluba(broj)
     {
       players.forEach(player => {
         var button = '<div class="btn-group"><button type = "button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="edit"><span class="glyphicon glyphicon-option-vertical"></span></button><ul class="dropdown-menu"><li><a href="#" data-toggle="modal" data-target="#profilIgracaModal" id="prikaziProfilIgracaBtn" personid="'+player.personId+'">Player profile</a></li></ul></div>'
-        tablePlayersScore.row.add( [ player.firstName, player.lastName, player.teamSitesOnly.posFull, player.yearsPro, player.country,button] ).draw();
+        tablePlayersScore.row.add( [button, player.firstName, player.lastName, player.teamSitesOnly.posFull, player.yearsPro, player.country] ).draw();
       });
     }
    
@@ -279,7 +306,8 @@ function FiltrirajProfilIgraca(playerIdpar)
       "paging":   false,
       "ordering": false,
       "info":     false,
-      "searching": false
+      "searching": false,
+      "responsive": true
     });
   }
   tablePlayerScore.clear();
@@ -315,7 +343,8 @@ function FiltrirajSezonuIgraca() {
       "paging":   false,
       "ordering": false,
       "info":     false,
-      "searching": false
+      "searching": false,
+      "responsive": true
     });
   }
   tablePlayerSeasonalScore.clear();

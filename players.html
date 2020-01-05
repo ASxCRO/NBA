@@ -67,12 +67,12 @@
       <table id="player-score" class="table table-striped table-bordered nowrap" style="width:100%">
         <thead>
           <tr>
+            <th></th>
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Position</th>
             <th>Years Pro</th>
             <th>Country</th>
-            <th></th>
           </tr>
         </thead>
         <div id="wrapper">       
@@ -90,9 +90,11 @@
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-          <h4 class="modal-title" id="profilIgracaLabel"></h4>
-          <h5 class="modal-title" id="klubIgracaLabel"></h5>
-          <img id="clubLogo" alt="club_logo">
+          <div class="flex-container">
+            <h4 class="modal-title" id="profilIgracaLabel"></h4>
+            <img id="clubLogo" alt="club_logo">
+            <img id="playerImage" alt="player_image">
+          </div>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	      </div>
 	      <div class="modal-body">

@@ -228,59 +228,6 @@ body {
   background: url('../img/nba-western-conference.png') no-repeat top left/40px 40px;
 }
 
-
-
-
-
- @media(max-width:768px)
- {
-
-  .wrap-cards {
-    grid-template-columns: 1fr;
-    }
-
-   .row {
-       margin-bottom: 2rem;
-   }
-
-     .p-clubs-list {
-      grid-template-columns: 1fr 1fr;
-     }
-
-  
-
- }
-
- @media(max-width:468px)
-{
-
-
-    .p-clubs-list {
-     grid-template-columns: 1fr;
-    }
-
- 
-
-}
-
-  @media(max-width:950px)
- {
-     .card{
-         padding-top: 20px;
-     }
-     .row {
-         margin-bottom: 2rem;
-     }
- }
-
-
- @media (min-width: 576px) {
-  .modal-dialog {
-    max-width: 1200px;
-    margin: 1.75rem auto;
-  }
-}
-
 .modal-title {
   color: white;
   z-index: 5;
@@ -294,8 +241,17 @@ body {
   position: relative;
   width: 100%;
   background-size: cover;
+  overflow: hidden;
+
 }
 
+.flex-container {
+  width: 100%;
+  display:grid;
+  grid-template-columns: 2fr 0.5fr 0.5fr;
+  justify-content: space-between;
+
+}
 
 
 .modal-header:before {
@@ -319,4 +275,84 @@ body {
   font-size: 1.5rem;
   font-family: 'Rock Salt', cursive;
   color: #555555;
+}
+
+#clubLogo {
+  z-index: 10;
+}
+
+#playerImage {
+  z-index: 10;
+}
+
+.modal-header .close {
+  margin-left:0;
+
+}
+
+
+
+
+
+
+@media(max-width:768px)
+{
+
+ .wrap-cards {
+   grid-template-columns: 1fr;
+   }
+
+  .row {
+      margin-bottom: 2rem;
+  }
+
+    .p-clubs-list {
+     grid-template-columns: 1fr 1fr;
+    }
+
+    #clubLogo {
+      display:none;
+    }
+ 
+
+}
+
+@media(max-width:510px)
+{
+    #playerImage {
+      display:none;
+    }
+ 
+
+}
+
+
+@media(max-width:468px)
+{
+
+
+   .p-clubs-list {
+    grid-template-columns: 1fr;
+   }
+
+
+
+}
+
+ @media(max-width:950px)
+{
+    .card{
+        padding-top: 20px;
+    }
+    .row {
+        margin-bottom: 2rem;
+    }
+}
+
+
+@media (min-width: 576px) {
+ .modal-dialog {
+   max-width: 1200px;
+   margin: 1.75rem auto;
+ }
 }
