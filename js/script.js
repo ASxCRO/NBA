@@ -138,9 +138,6 @@ window.addEventListener("load", function(){
         }
       });
       var Redak='<tr>';
-      var table = $('#games-score').DataTable( {
-        "responsive": true
-      });
       table.clear();
       FiltrirajUtakmice();
       FiltrirajIgraceKluba(1);
