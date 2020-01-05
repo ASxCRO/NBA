@@ -1,0 +1,322 @@
+
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+* {  
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a,h1,h2,h3,p {
+  font-family: 'Roboto', sans-serif;
+}
+
+
+.loader-container {
+  position: relative;
+}
+/*PRELOADING------------ */
+#overlayer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 7100;
+  background: white;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.loader {
+  z-index: 7700;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.spinner-border {
+  height: 5rem;
+  width: 5rem;
+}
+
+
+#logo {
+  width: 50px;
+  height: 50px;
+}
+
+
+
+.navbar-nav .nav-item .nav-link {
+  margin-left: 4rem;
+  padding: 0.4rem 2rem;
+  border: 1px solid white;
+  border-radius: 5px;
+  display: inline-block !important;
+
+}
+
+
+
+
+.nav-item a:hover {
+    background: #2f4357;
+    color:white;
+    display: inline-block;
+    transform: scale(1.05);
+    transition: transform 1s;
+
+}
+
+.wrap-header {
+  display: flex;
+  flex-direction: row ;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+}
+
+.wrap-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  row-gap: 2rem;
+}
+
+#myCarousel {
+  width: 50%;
+  margin: 0;
+  display: inline-block;
+  padding: 0;
+}
+
+.carousel{
+  background: #2f4357;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.carousel-item{
+  text-align: center;
+
+}
+
+.carousel-item img {
+  width: 100%; 
+  height: 100%;
+
+}
+
+.carousel-item p {
+  text-shadow: black 0px 0px 5px;
+}
+
+body {
+  padding-top: 90px;
+  background: url('../img/cover.jpg') no-repeat center center/cover;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.clubs {
+  background: none;
+
+}
+
+#largeNba {
+  width: 30%;
+}
+
+@media(max-width: 950px)
+{
+  #mCarousel {
+    width: 90%;
+  }
+  #largeNba
+  {
+    display: none;
+  }
+}
+
+.card {
+
+  background-color: rgba(0,0,0,.7);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+  color: white; 
+  position:relative;
+  z-index: 2;
+}
+
+.card-body{
+    text-align:center;
+}
+
+#click:hover {
+  cursor: pointer;
+}
+
+
+  hr { background-color: white; height: 1px; border: 0; }
+
+  card a {
+      padding: 0.3rem 1rem;
+      border-radius: 10px;
+      border: 1px solid white;
+      color: #fff;
+  }
+
+    card a:hover {
+      padding: 0.3rem 1rem;
+      border-radius: 10px;
+      border: 1px solid #fff;
+  }
+
+
+  .p-clubs-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    grid-gap: 2rem;
+    align-items: center;
+    padding-bottom: 40px;
+  }
+
+  .p-clubs-list .team {
+    width: 100%;
+   display: inline-flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+  }
+
+  .p-clubs-list .team .img-wrapper {
+    display: flex;
+    height: 170px;
+  }
+
+  .p-clubs-list .team a {
+    font-size: 18px;
+    color: rgb(78, 78, 78);
+    padding: 0px 20px;
+}
+
+  .p-clubs-list .team .img-wrapper img {
+    align-self: center;
+    width: 170px;
+    max-width: 200px;
+}
+
+.p-clubs-list .team a {
+  font-size: 18px;
+  color: rgb(78, 78, 78);
+  padding: 0px 20px;
+}
+
+.clubs-footer {
+  background: #343a40;
+  background: url('../img/cover.jpg') no-repeat center center/cover;
+}
+
+.east:hover {
+  background: url('../img/nba-eastern-conference.png') no-repeat top left/40px 40px;
+}
+
+.west:hover {
+  background: url('../img/nba-western-conference.png') no-repeat top left/40px 40px;
+}
+
+
+
+
+
+ @media(max-width:768px)
+ {
+
+  .wrap-cards {
+    grid-template-columns: 1fr;
+    }
+
+   .row {
+       margin-bottom: 2rem;
+   }
+
+     .p-clubs-list {
+      grid-template-columns: 1fr 1fr;
+     }
+
+  
+
+ }
+
+ @media(max-width:468px)
+{
+
+
+    .p-clubs-list {
+     grid-template-columns: 1fr;
+    }
+
+ 
+
+}
+
+  @media(max-width:950px)
+ {
+     .card{
+         padding-top: 20px;
+     }
+     .row {
+         margin-bottom: 2rem;
+     }
+ }
+
+
+ @media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 1200px;
+    margin: 1.75rem auto;
+  }
+}
+
+.modal-title {
+  color: white;
+  z-index: 5;
+  font-size: 4rem;
+}
+
+.modal-header{
+
+
+  height: 200px;
+  position: relative;
+  width: 100%;
+  background-size: cover;
+}
+
+
+
+.modal-header:before {
+  content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-image: linear-gradient(to bottom right,#002f4b,#dc4225);
+	opacity: .6; 
+}
+
+#player-score-carrer {
+  margin-bottom: 2rem;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Rock+Salt&display=swap');
+#klubIgracaLabel{
+  display: block;
+  font-size: 1.5rem;
+  font-family: 'Rock Salt', cursive;
+  color: #555555;
+}
