@@ -7,7 +7,7 @@ jQuery(document).ready(function() {
   
 });
 
-let requestURL = 'http://data.nba.net/data/10s/prod/v1/2019/teams.json';
+let requestURL = 'https://data.nba.net/data/10s/prod/v1/2019/teams.json';
 let request = new XMLHttpRequest();
 request.open('GET', requestURL);
 request.responseType = 'json';
@@ -82,7 +82,7 @@ var team = 0;
 var teamStandingsEast = [];
 var teamStandingsWest = [];
 var teamStandingsAll = [];
-let requestURLstandings = 'http://data.nba.net/data/10s/prod/v1/current/standings_conference.json';
+let requestURLstandings = 'https://data.nba.net/data/10s/prod/v1/current/standings_conference.json';
 let requestStandings = new XMLHttpRequest();
 requestStandings.open('GET', requestURLstandings);
 requestStandings.responseType = 'json';
@@ -96,8 +96,10 @@ requestStandings.onload = function() {
 }
 
 var games = [];
+var playerId = 0;
 
-let requestURLgames = 'http://data.nba.net/data/10s/prod/v1/2019/schedule.json';
+
+let requestURLgames = 'https://data.nba.net/data/10s/prod/v1/2019/schedule.json';
 let requestGames = new XMLHttpRequest();
 requestGames.open('GET', requestURLgames);
 requestGames.responseType = 'json';
@@ -109,7 +111,6 @@ requestGames.onload = function() {
 
 }
 
-var playerId = 0;
 
 window.addEventListener("load", function(){
   $('.team a').click(function () {
@@ -183,10 +184,6 @@ window.addEventListener("load", function(){
       FiltrirajProfilIgraca(playerId);
       FiltrirajSezonuIgraca();
   });
- 
-  
-
-
 });
 
 
@@ -209,7 +206,7 @@ function FiltrirajUtakmice()
     trazenaGodina = '2019';
   }
 
-	let requestURLgame = 'http://data.nba.net/data/10s/prod/v1/'+trazenaGodina+'/schedule.json';
+	let requestURLgame = 'https://data.nba.net/data/10s/prod/v1/'+trazenaGodina+'/schedule.json';
   let requestGame = new XMLHttpRequest();
   requestGame.open('GET', requestURLgame);
   requestGame.responseType = 'json';
@@ -266,7 +263,7 @@ function FiltrirajIgraceKluba(broj)
   tablePlayers.clear();
   tablePlayersScore.clear();
 
-	let requestURLplayers = 'http://data.nba.net/data/10s/prod/v1/2019/players.json';
+	let requestURLplayers = 'https://data.nba.net/data/10s/prod/v1/2019/players.json';
   let requestPlayers = new XMLHttpRequest();
   requestPlayers.open('GET', requestURLplayers);
   requestPlayers.responseType = 'json';
@@ -318,7 +315,7 @@ function FiltrirajProfilIgraca(playerIdpar)
   }
   tablePlayerScore.clear();
 
-	let requestURLplayers = 'http://data.nba.net/data/10s/prod/v1/2019/players/'+playerIdpar+'_profile.json';
+	let requestURLplayers = 'https://data.nba.net/data/10s/prod/v1/2019/players/'+playerIdpar+'_profile.json';
   let requestPlayers = new XMLHttpRequest();
   requestPlayers.open('GET', requestURLplayers);
   requestPlayers.responseType = 'json';
@@ -361,7 +358,7 @@ function FiltrirajSezonuIgraca() {
     trazenaGodina = '2019';
   }
 
-	let requestURLplayerSeason = 'http://data.nba.net/data/10s/prod/v1/'+trazenaGodina+'/players/'+playerId+'_profile.json';
+	let requestURLplayerSeason = 'https://data.nba.net/data/10s/prod/v1/'+trazenaGodina+'/players/'+playerId+'_profile.json';
   let requestPlayerSeason = new XMLHttpRequest();
   requestPlayerSeason.open('GET', requestURLplayerSeason);
   requestPlayerSeason.responseType = 'json';
