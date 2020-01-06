@@ -103,7 +103,7 @@ if (window.location.pathname == '/clubs.html') {
 
 
   let requestURLgames = 'https://cors-anywhere.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/schedule.json';
-  let requestGames = new XMLHttpRequest();
+  var requestGames = new XMLHttpRequest();
   requestGames.open('GET', requestURLgames);
   requestGames.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
   requestGames.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -160,7 +160,7 @@ window.addEventListener("load", function(){
 
       
     
-    $('#clubLogo').attr('src','https://cors-anywhere.herokuapp.com/https://www.nba.com/assets/logos/teams/primary/web/'+team.teamSitesOnly.teamTricode+'.svg');
+    $('#clubLogo').attr('src','https://www.nba.com/assets/logos/teams/primary/web/'+team.teamSitesOnly.teamTricode+'.svg');
     $('#clubLogo').attr('title', team.teamSitesOnly.teamKey+' '+team.teamSitesOnly.teamNickname);
 
     $('#profilKlubaModal').modal();
