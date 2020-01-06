@@ -16,49 +16,49 @@ request.onload = function() {
   const allClubs = request.response;
   const nbaClubs = allClubs['league']['standard'];
   listOnlyNBAfranchise(nbaClubs)
-  NBAfranchise.forEach(element => {
-    var teamDiv = document.createElement('div');
-    teamDiv.setAttribute('class','team'); 
-    if(element.confName == 'East')
-    {
-      teamDiv.className += ' ' + element.confName.toLowerCase();
-    }
-    else
-    {
-      teamDiv.className += ' ' + element.confName.toLowerCase();
-    }
-     teamDiv.setAttribute('id',element.tricode)
-     var imgWrapper = document.createElement('div');
-     imgWrapper.setAttribute('class', 'img-wrapper');
-     var linkToModal = document.createElement('a')
-     linkToModal.setAttribute('href','#');
-     linkToModal.setAttribute('data-toggle','modal');
-     linkToModal.setAttribute('data-target','profilKlubaModal');
-     linkToModal.setAttribute('id',element.tricode);
-
-     var clubImage = document.createElement('img');
-     clubImage.setAttribute('src','https://www.nba.com/assets/logos/teams/primary/web/'+element.tricode+'.svg');
-     teamDiv.append(imgWrapper);
-     teamDiv.append(linkToModal);
-     imgWrapper.append(linkToModal);
-     linkToModal.append(clubImage);
-     
-    var textBellowImg = document.createElement('a');
-    textBellowImg.setAttribute('href','#');
-    textBellowImg.setAttribute('data-toggle','modal');
-    textBellowImg.setAttribute('data-target','profilKlubaModal');
-    textBellowImg.innerText = element.fullName;
-    textBellowImg.setAttribute('id',element.tricode);
-
-    teamDiv.append(textBellowImg);
-    jQuery('.p-clubs-list').append(teamDiv);
-
-  
-  });
-  if (window.location.pathname == '/players.html') {
-    FiltrirajIgraceKluba(2);
+  if (window.location.pathname == '/clubs.html') {
+      NBAfranchise.forEach(element => {
+        var teamDiv = document.createElement('div');
+        teamDiv.setAttribute('class','team'); 
+        if(element.confName == 'East')
+        {
+          teamDiv.className += ' ' + element.confName.toLowerCase();
+        }
+        else
+        {
+          teamDiv.className += ' ' + element.confName.toLowerCase();
+        }
+        teamDiv.setAttribute('id',element.tricode)
+        var imgWrapper = document.createElement('div');
+        imgWrapper.setAttribute('class', 'img-wrapper');
+        var linkToModal = document.createElement('a')
+        linkToModal.setAttribute('href','#');
+        linkToModal.setAttribute('data-toggle','modal');
+        linkToModal.setAttribute('data-target','profilKlubaModal');
+        linkToModal.setAttribute('id',element.tricode);
+    
+        var clubImage = document.createElement('img');
+        clubImage.setAttribute('src','https://www.nba.com/assets/logos/teams/primary/web/'+element.tricode+'.svg');
+        teamDiv.append(imgWrapper);
+        teamDiv.append(linkToModal);
+        imgWrapper.append(linkToModal);
+        linkToModal.append(clubImage);
+        
+        var textBellowImg = document.createElement('a');
+        textBellowImg.setAttribute('href','#');
+        textBellowImg.setAttribute('data-toggle','modal');
+        textBellowImg.setAttribute('data-target','profilKlubaModal');
+        textBellowImg.innerText = element.fullName;
+        textBellowImg.setAttribute('id',element.tricode);
+    
+        teamDiv.append(textBellowImg);
+        jQuery('.p-clubs-list').append(teamDiv);
+    });
   }
+}
 
+if (window.location.pathname == '/players.html') {
+  FiltrirajIgraceKluba(2);
 }
 
 var NBAfranchise = [];
@@ -71,49 +71,51 @@ function listOnlyNBAfranchise(jsonObj) {
   }
 }
 
-NBAfranchise.forEach(element => {
-  var teamDiv = document.createElement('div');
-  teamDiv.setAttribute('class','team'); 
-   teamDiv.setAttribute('id',element.teamId);
-  jQuery('.p-clubs-list').append(teamDiv);
-});
+// NBAfranchise.forEach(element => {
+//   var teamDiv = document.createElement('div');
+//   teamDiv.setAttribute('class','team'); 
+//    teamDiv.setAttribute('id',element.teamId);
+//   jQuery('.p-clubs-list').append(teamDiv);
+// });
 
-var team = 0;
-var teamStandingsEast = [];
-var teamStandingsWest = [];
-var teamStandingsAll = [];
-let requestURLstandings = 'https://cors-anywhere.herokuapp.com/https://data.nba.net/data/10s/prod/v1/current/standings_conference.json';
-let requestStandings = new XMLHttpRequest();
-requestStandings.open('GET', requestURLstandings);
-requestStandings.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
-requestStandings.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-requestStandings.responseType = 'json';
-requestStandings.send();
+if (window.location.pathname == '/clubs.html') {
+  var team = 0;
+  var teamStandingsEast = [];
+  var teamStandingsWest = [];
+  var teamStandingsAll = [];
+  let requestURLstandings = 'https://cors-anywhere.herokuapp.com/https://data.nba.net/data/10s/prod/v1/current/standings_conference.json';
+  let requestStandings = new XMLHttpRequest();
+  requestStandings.open('GET', requestURLstandings);
+  requestStandings.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
+  requestStandings.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  requestStandings.responseType = 'json';
+  requestStandings.send();
 
-requestStandings.onload = function() {
-  var standingsAll = requestStandings.response;
-  teamStandingsEast = standingsAll['league']['standard']['conference']['east'];
-  teamStandingsWest = standingsAll['league']['standard']['conference']['west'];
-  teamStandingsAll = teamStandingsAll.concat(teamStandingsEast,teamStandingsWest);
+  requestStandings.onload = function() {
+    var standingsAll = requestStandings.response;
+    teamStandingsEast = standingsAll['league']['standard']['conference']['east'];
+    teamStandingsWest = standingsAll['league']['standard']['conference']['west'];
+    teamStandingsAll = teamStandingsAll.concat(teamStandingsEast,teamStandingsWest);
+  }
+
+  var games = [];
+  var playerId = 0;
+
+
+  let requestURLgames = 'https://cors-anywhere.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/schedule.json';
+  let requestGames = new XMLHttpRequest();
+  requestGames.open('GET', requestURLgames);
+  requestGames.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
+  requestGames.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  requestGames.responseType = 'json';
+  requestGames.send();
+
+  requestGames.onload = function() {
+    var gamesAll = requestGames.response;
+    games = gamesAll['league']['standard'];
+  }
 }
 
-var games = [];
-var playerId = 0;
-
-
-let requestURLgames = 'https://cors-anywhere.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/schedule.json';
-let requestGames = new XMLHttpRequest();
-requestGames.open('GET', requestURLgames);
-requestGames.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
-requestGames.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-requestGames.responseType = 'json';
-requestGames.send();
-
-requestGames.onload = function() {
-  var gamesAll = requestGames.response;
-  games = gamesAll['league']['standard'];
-
-}
 
 
 window.addEventListener("load", function(){
