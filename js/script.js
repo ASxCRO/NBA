@@ -5,7 +5,10 @@ jQuery(document).ready(function() {
 
 let requestURL = 'https://cors-anywhere.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/teams.json';
 let request = new XMLHttpRequest();
+
 request.open('GET', requestURL);
+request.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
+request.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 request.responseType = 'json';
 request.send();
 
@@ -52,7 +55,9 @@ request.onload = function() {
 
   
   });
-  FiltrirajIgraceKluba(2);
+  if (window.location.pathname == '/players.html') {
+    FiltrirajIgraceKluba(2);
+  }
 
 }
 
@@ -71,7 +76,6 @@ NBAfranchise.forEach(element => {
   teamDiv.setAttribute('class','team'); 
    teamDiv.setAttribute('id',element.teamId);
   jQuery('.p-clubs-list').append(teamDiv);
-
 });
 
 var team = 0;
@@ -81,6 +85,8 @@ var teamStandingsAll = [];
 let requestURLstandings = 'https://cors-anywhere.herokuapp.com/https://data.nba.net/data/10s/prod/v1/current/standings_conference.json';
 let requestStandings = new XMLHttpRequest();
 requestStandings.open('GET', requestURLstandings);
+requestStandings.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
+requestStandings.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 requestStandings.responseType = 'json';
 requestStandings.send();
 
@@ -98,6 +104,8 @@ var playerId = 0;
 let requestURLgames = 'https://cors-anywhere.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/schedule.json';
 let requestGames = new XMLHttpRequest();
 requestGames.open('GET', requestURLgames);
+requestGames.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
+requestGames.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 requestGames.responseType = 'json';
 requestGames.send();
 
@@ -261,6 +269,8 @@ function FiltrirajIgraceKluba(broj)
 	let requestURLplayers = 'https://cors-anywhere.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/players.json';
   let requestPlayers = new XMLHttpRequest();
   requestPlayers.open('GET', requestURLplayers);
+  requestPlayers.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
+  requestPlayers.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   requestPlayers.responseType = 'json';
   requestPlayers.send();
 
@@ -285,8 +295,6 @@ function FiltrirajIgraceKluba(broj)
         tablePlayersScore.row.add( [button, player.firstName, player.lastName, player.teamSitesOnly.posFull, player.yearsPro, player.country] ).draw();
       });
     }
-   
-
   }
 }
 
@@ -313,6 +321,8 @@ function FiltrirajProfilIgraca(playerIdpar)
 	let requestURLplayers = 'https://cors-anywhere.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/players/'+playerIdpar+'_profile.json';
   let requestPlayers = new XMLHttpRequest();
   requestPlayers.open('GET', requestURLplayers);
+  requestPlayers.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
+  requestPlayers.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   requestPlayers.responseType = 'json';
   requestPlayers.send();
 
@@ -356,6 +366,8 @@ function FiltrirajSezonuIgraca() {
 	let requestURLplayerSeason = 'https://cors-anywhere.herokuapp.com/https://data.nba.net/data/10s/prod/v1/'+trazenaGodina+'/players/'+playerId+'_profile.json';
   let requestPlayerSeason = new XMLHttpRequest();
   requestPlayerSeason.open('GET', requestURLplayerSeason);
+  requestPlayerSeason.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
+  requestPlayerSeason.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   requestPlayerSeason.responseType = 'json';
   requestPlayerSeason.send();
 
