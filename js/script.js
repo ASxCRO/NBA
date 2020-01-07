@@ -2,13 +2,14 @@ jQuery(document).ready(function() {
 	jQuery(".loader").delay(1000).fadeOut("slow");
   jQuery("#overlayer").delay(1000).fadeOut("slow");
 });
-
-let requestURL = 'https://test.cors.workers.dev/?https://data.nba.net/data/10s/prod/v1/2019/teams.json';
+var NBAfranchise = [];
+var broj = 1;
+let requestURL = 'https://ancient-lake-18259.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/teams.json';
 let request = new XMLHttpRequest();
 
 request.open('GET', requestURL);
-request.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
-request.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+// request.setRequestHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
+// request.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 request.responseType = 'json';
 request.send();
 
@@ -55,13 +56,15 @@ request.onload = function() {
         jQuery('.p-clubs-list').append(teamDiv);
     });
   }
+  else if (window.location.pathname == '/players.html') {
+    FiltrirajIgraceKluba(2);
+  }
+
 }
 
-if (window.location.pathname == '/players.html') {
-  FiltrirajIgraceKluba(2);
-}
 
-var NBAfranchise = [];
+
+
 function listOnlyNBAfranchise(jsonObj) {
 
   for (let i = 0; i < jsonObj.length; i++) {
@@ -71,22 +74,23 @@ function listOnlyNBAfranchise(jsonObj) {
   }
 }
 
-// NBAfranchise.forEach(element => {
-//   var teamDiv = document.createElement('div');
-//   teamDiv.setAttribute('class','team'); 
-//    teamDiv.setAttribute('id',element.teamId);
-//   jQuery('.p-clubs-list').append(teamDiv);
-// });
+
+
+// if(window.location.pathname == "/players.html")
+// {
+//   FiltrirajIgraceKluba(2);
+// }
+
 
 if (window.location.pathname == '/clubs.html') {
   var team = 0;
   var teamStandingsEast = [];
   var teamStandingsWest = [];
   var teamStandingsAll = [];
-  let requestURLstandings = 'https://test.cors.workers.dev/?https://data.nba.net/data/10s/prod/v1/current/standings_conference.json';
+  let requestURLstandings = 'https://ancient-lake-18259.herokuapp.com/https://data.nba.net/data/10s/prod/v1/current/standings_conference.json';
   let requestStandings = new XMLHttpRequest();
   requestStandings.open('GET', requestURLstandings);
-  requestStandings.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
+  requestStandings.setRequestHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
   requestStandings.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   requestStandings.responseType = 'json';
   requestStandings.send();
@@ -102,10 +106,10 @@ if (window.location.pathname == '/clubs.html') {
   var playerId = 0;
 
 
-  let requestURLgames = 'https://test.cors.workers.dev/?https://data.nba.net/data/10s/prod/v1/2019/schedule.json';
+  let requestURLgames = 'https://ancient-lake-18259.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/schedule.json';
   var requestGames = new XMLHttpRequest();
   requestGames.open('GET', requestURLgames);
-  requestGames.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
+  requestGames.setRequestHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
   requestGames.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   requestGames.responseType = 'json';
   requestGames.send();
@@ -211,7 +215,7 @@ function FiltrirajUtakmice()
     trazenaGodina = '2019';
   }
 
-	let requestURLgame = 'https://test.cors.workers.dev/?https://data.nba.net/data/10s/prod/v1/'+trazenaGodina+'/schedule.json';
+	let requestURLgame = 'https://ancient-lake-18259.herokuapp.com/https://data.nba.net/data/10s/prod/v1/'+trazenaGodina+'/schedule.json';
   let requestGame = new XMLHttpRequest();
   requestGame.open('GET', requestURLgame);
   requestGame.responseType = 'json';
@@ -248,31 +252,37 @@ function FiltrirajUtakmice()
 var players = [];
 function FiltrirajIgraceKluba(broj)
 {
-  if ( $.fn.dataTable.isDataTable( '#club-players' )  ) {  
-    var tablePlayers = $('#club-players').DataTable();
-  }
-  else {
-    var tablePlayers = $('#club-players').DataTable( {
-      "responsive": true
-    });
-  }
-  if ( $.fn.dataTable.isDataTable( '#player-score' )  ) {  
-    var tablePlayersScore = $('#player-score').DataTable();
-  }
-  else {
-    var tablePlayersScore = $('#player-score').DataTable( {
-      "responsive": true
-    });
-  }
- 
-  tablePlayers.clear();
-  tablePlayersScore.clear();
+  var tablePlayersScore = undefined;
+  if(broj == 1)
+  {
+    if ( $.fn.dataTable.isDataTable( '#club-players' )  ) {  
+      var tablePlayers = $('#club-players').DataTable();
+    }
+    else {
+      var tablePlayers = $('#club-players').DataTable( {
+        "responsive": true
+      });
+    }
+    tablePlayers.clear();
 
-	let requestURLplayers = 'https://test.cors.workers.dev/?https://data.nba.net/data/10s/prod/v1/2019/players.json';
+  }
+  else if(broj == 2)
+  {
+    if ( $.fn.dataTable.isDataTable( '#player-score' )  ) {  
+        tablePlayersScore = $('#player-score').DataTable();
+    }
+    else {
+        tablePlayersScore = $('#player-score').DataTable( {
+        "responsive": true
+      });
+    }
+
+  }
+
+
+	let requestURLplayers = 'https://ancient-lake-18259.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/players.json';
   let requestPlayers = new XMLHttpRequest();
   requestPlayers.open('GET', requestURLplayers);
-  requestPlayers.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
-  requestPlayers.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   requestPlayers.responseType = 'json';
   requestPlayers.send();
 
@@ -290,12 +300,24 @@ function FiltrirajIgraceKluba(broj)
         }
       });
     }
-    else
+    else if(broj == 2)
     {
+      var position = '';
       players.forEach(player => {
-        var button = '<div class="btn-group"><button type = "button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="edit"><span class="glyphicon glyphicon-option-vertical"></span></button><ul class="dropdown-menu"><li><a href="#" data-toggle="modal" data-target="#profilIgracaModal" id="prikaziProfilIgracaBtn" personid="'+player.personId+'">Player profile</a></li></ul></div>'
-        tablePlayersScore.row.add( [button, player.firstName, player.lastName, player.teamSitesOnly.posFull, player.yearsPro, player.country] ).draw();
+        if(player.teamSitesOnly == undefined)
+        {
+          position = 'Center';
+        }
+        else
+        {
+          position = player.teamSitesOnly.posFull;
+        }
+        var button = '<div class="btn-group"><button type = "button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="edit"><span class="glyphicon glyphicon-option-vertical"></span></button><ul class="dropdown-menu"><li><a href="#" data-toggle="modal" data-target="#profilIgracaModal" id="prikaziProfilIgracaBtn" personid="'+player.personId+'">Player profile</a></li></ul></div>';
+        console.log(tablePlayersScore.row().count());
+        tablePlayersScore.row.add( [button, player.firstName, player.lastName, position, player.yearsPro, player.country] );
+
       });
+      tablePlayersScore.draw();
     }
   }
 }
@@ -320,10 +342,10 @@ function FiltrirajProfilIgraca(playerIdpar)
   }
   tablePlayerScore.clear();
 
-	let requestURLplayers = 'https://test.cors.workers.dev/?https://data.nba.net/data/10s/prod/v1/2019/players/'+playerIdpar+'_profile.json';
+	let requestURLplayers = 'https://ancient-lake-18259.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/players/'+playerIdpar+'_profile.json';
   let requestPlayers = new XMLHttpRequest();
   requestPlayers.open('GET', requestURLplayers);
-  requestPlayers.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
+  requestPlayers.setRequestHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
   requestPlayers.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   requestPlayers.responseType = 'json';
   requestPlayers.send();
@@ -365,10 +387,10 @@ function FiltrirajSezonuIgraca() {
     trazenaGodina = '2019';
   }
 
-	let requestURLplayerSeason = 'https://test.cors.workers.dev/?https://data.nba.net/data/10s/prod/v1/'+trazenaGodina+'/players/'+playerId+'_profile.json';
+	let requestURLplayerSeason = 'https://ancient-lake-18259.herokuapp.com/https://data.nba.net/data/10s/prod/v1/'+trazenaGodina+'/players/'+playerId+'_profile.json';
   let requestPlayerSeason = new XMLHttpRequest();
   requestPlayerSeason.open('GET', requestURLplayerSeason);
-  requestPlayerSeason.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
+  requestPlayerSeason.setRequestHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
   requestPlayerSeason.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   requestPlayerSeason.responseType = 'json';
   requestPlayerSeason.send();
