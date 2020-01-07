@@ -3,7 +3,7 @@ jQuery(document).ready(function() {
   jQuery("#overlayer").delay(1000).fadeOut("slow");
 });
 
-let requestURL = 'https://cors-anywhere.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/teams.json';
+let requestURL = 'https://test.cors.workers.dev/https://data.nba.net/data/10s/prod/v1/2019/teams.json';
 let request = new XMLHttpRequest();
 
 request.open('GET', requestURL);
@@ -83,7 +83,7 @@ if (window.location.pathname == '/clubs.html') {
   var teamStandingsEast = [];
   var teamStandingsWest = [];
   var teamStandingsAll = [];
-  let requestURLstandings = 'https://cors-anywhere.herokuapp.com/https://data.nba.net/data/10s/prod/v1/current/standings_conference.json';
+  let requestURLstandings = 'https://test.cors.workers.dev/https://data.nba.net/data/10s/prod/v1/current/standings_conference.json';
   let requestStandings = new XMLHttpRequest();
   requestStandings.open('GET', requestURLstandings);
   requestStandings.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
@@ -102,7 +102,7 @@ if (window.location.pathname == '/clubs.html') {
   var playerId = 0;
 
 
-  let requestURLgames = 'https://cors-anywhere.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/schedule.json';
+  let requestURLgames = 'https://test.cors.workers.dev/https://data.nba.net/data/10s/prod/v1/2019/schedule.json';
   var requestGames = new XMLHttpRequest();
   requestGames.open('GET', requestURLgames);
   requestGames.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
@@ -211,7 +211,7 @@ function FiltrirajUtakmice()
     trazenaGodina = '2019';
   }
 
-	let requestURLgame = 'https://cors-anywhere.herokuapp.com/https://data.nba.net/data/10s/prod/v1/'+trazenaGodina+'/schedule.json';
+	let requestURLgame = 'https://test.cors.workers.dev/https://data.nba.net/data/10s/prod/v1/'+trazenaGodina+'/schedule.json';
   let requestGame = new XMLHttpRequest();
   requestGame.open('GET', requestURLgame);
   requestGame.responseType = 'json';
@@ -268,7 +268,7 @@ function FiltrirajIgraceKluba(broj)
   tablePlayers.clear();
   tablePlayersScore.clear();
 
-	let requestURLplayers = 'https://cors-anywhere.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/players.json';
+	let requestURLplayers = 'https://test.cors.workers.dev/https://data.nba.net/data/10s/prod/v1/2019/players.json';
   let requestPlayers = new XMLHttpRequest();
   requestPlayers.open('GET', requestURLplayers);
   requestPlayers.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
@@ -320,7 +320,7 @@ function FiltrirajProfilIgraca(playerIdpar)
   }
   tablePlayerScore.clear();
 
-	let requestURLplayers = 'https://cors-anywhere.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/players/'+playerIdpar+'_profile.json';
+	let requestURLplayers = 'https://test.cors.workers.dev/https://data.nba.net/data/10s/prod/v1/2019/players/'+playerIdpar+'_profile.json';
   let requestPlayers = new XMLHttpRequest();
   requestPlayers.open('GET', requestURLplayers);
   requestPlayers.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
@@ -365,7 +365,7 @@ function FiltrirajSezonuIgraca() {
     trazenaGodina = '2019';
   }
 
-	let requestURLplayerSeason = 'https://cors-anywhere.herokuapp.com/https://data.nba.net/data/10s/prod/v1/'+trazenaGodina+'/players/'+playerId+'_profile.json';
+	let requestURLplayerSeason = 'https://test.cors.workers.dev/https://data.nba.net/data/10s/prod/v1/'+trazenaGodina+'/players/'+playerId+'_profile.json';
   let requestPlayerSeason = new XMLHttpRequest();
   requestPlayerSeason.open('GET', requestURLplayerSeason);
   requestPlayerSeason.setRequestHeader("Access-Control-Allow-Origin", "https://asxcro.tech");
