@@ -4,7 +4,7 @@ jQuery(document).ready(function() {
 });
 var NBAfranchise = [];
 var broj = 1;
-$.getJSON('http://api.allorigins.win/get?url=https%3A//data.nba.net/data/10s/prod/v1/2019/teams.json&callback=?', function (json) {
+$.getJSON('https://api.allorigins.win/get?url=https%3A//data.nba.net/data/10s/prod/v1/2019/teams.json&callback=?', function (json) {
   const allClubs = JSON.parse(json.contents);
   const nbaClubs = allClubs.league.standard;
   listOnlyNBAfranchise(nbaClubs);
