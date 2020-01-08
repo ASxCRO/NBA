@@ -313,7 +313,6 @@ function FiltrirajIgraceKluba(broj)
           position = player.teamSitesOnly.posFull;
         }
         var button = '<div class="btn-group"><button type = "button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="edit"><span class="glyphicon glyphicon-option-vertical"></span></button><ul class="dropdown-menu"><li><a href="#" data-toggle="modal" data-target="#profilIgracaModal" id="prikaziProfilIgracaBtn" personid="'+player.personId+'">Player profile</a></li></ul></div>';
-        console.log(tablePlayersScore.row().count());
         tablePlayersScore.row.add( [button, player.firstName, player.lastName, position, player.yearsPro, player.country] );
 
       });
