@@ -67,7 +67,7 @@ a,h1,h2,h3,p {
     transform: scale(1.05);
     transition: transform 1s;
 
-}
+} 
 
 .wrap-header {
   display: flex;
@@ -136,6 +136,9 @@ body {
   {
     display: none;
   }
+  #profilKlubaLabel, #profilIgracaLabel {
+    font-size: 3rem;
+  }
 }
 
 .card {
@@ -161,14 +164,14 @@ body {
 
   hr { background-color: white; height: 1px; border: 0; }
 
-  card a {
+  .card a {
       padding: 0.3rem 1rem;
       border-radius: 10px;
       border: 1px solid white;
       color: #fff;
   }
 
-    card a:hover {
+    .card a:hover {
       padding: 0.3rem 1rem;
       border-radius: 10px;
       border: 1px solid #fff;
@@ -290,9 +293,215 @@ body {
 
 }
 
+table {
+  color: #000!important;
+}
+
+thead {
+  color: #fff!important;
+}
+
+
+#overall-score td {
+  color: #fff;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #000;
+  background: #555555;
+}
+
+th,td {
+  text-align:center;
+}
+
+.hvr-underline-from-right:before {
+
+  background: #dc4225;
+
+}
 
 
 
+.draw-outline {
+  display: inline-block;
+  padding: 16px 28px;
+  border: 2px black solid;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  position: relative;
+  transition: border-color 0.35s ease-in-out;
+  z-index: 1;
+}
+.draw-outline:before, .draw-outline:after {
+  content: '';
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  box-sizing: content-box;
+  z-index: -1;
+  transition: -webkit-transform 0.25s ease-in-out;
+  transition: transform 0.25s ease-in-out;
+  transition: transform 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
+  padding-left: 2px;
+}
+.draw-outline:before {
+  top: -2px;
+  left: -2px;
+  border-top: 2px transparent solid;
+  border-right: 2px transparent solid;
+}
+.draw-outline:after {
+  bottom: -2px;
+  right: -2px;
+  border-bottom: 2px transparent solid;
+  border-left: 2px transparent solid;
+}
+.draw-outline:hover {
+  color: #37b2b2;
+  transition: color 0.35s ease-in-out, border-color 0.35s ease-in-out;
+  border-color: black;
+  -webkit-animation: outline-reset 0.35s 1 forwards;
+          animation: outline-reset 0.35s 1 forwards;
+}
+.draw-outline:hover:before {
+  -webkit-animation: top-right-border 0.75s 1 0.35s forwards;
+          animation: top-right-border 0.75s 1 0.35s forwards;
+}
+.draw-outline:hover:after {
+  -webkit-animation: bottom-left-border 0.75s 1 1.1s forwards;
+          animation: bottom-left-border 0.75s 1 1.1s forwards;
+}
+.draw-outline--tandem:hover:after {
+  -webkit-animation: bottom-left-border 0.75s 1 0.35s forwards;
+          animation: bottom-left-border 0.75s 1 0.35s forwards;
+}
+.draw-outline:active:before, .draw-outline:active:after {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+@-webkit-keyframes outline-reset {
+  0% {
+    border-color: black;
+  }
+  100% {
+    border-color: transparent;
+  }
+}
+
+@keyframes outline-reset {
+  0% {
+    border-color: black;
+  }
+  100% {
+    border-color: transparent;
+  }
+}
+@-webkit-keyframes top-right-border {
+  0% {
+    border-color: #37b2b2;
+    width: 0px;
+    height: 0;
+  }
+  50% {
+    width: 100%;
+    height: 0;
+  }
+  100% {
+    border-color: #37b2b2;
+    width: 100%;
+    height: 100%;
+  }
+}
+@keyframes top-right-border {
+  0% {
+    border-color: #37b2b2;
+    width: 0px;
+    height: 0;
+  }
+  50% {
+    width: 100%;
+    height: 0;
+  }
+  100% {
+    border-color: #37b2b2;
+    width: 100%;
+    height: 100%;
+  }
+}
+@-webkit-keyframes bottom-left-border {
+  0% {
+    border-color: #37b2b2;
+    width: 0px;
+    height: 0;
+  }
+  50% {
+    width: 100%;
+    height: 0;
+  }
+  100% {
+    border-color: #37b2b2;
+    width: 100%;
+    height: 100%;
+  }
+}
+@keyframes bottom-left-border {
+  0% {
+    border-color: #37b2b2;
+    width: 0px;
+    height: 0;
+  }
+  50% {
+    width: 100%;
+    height: 0;
+  }
+  100% {
+    border-color: #37b2b2;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
+
+
+
+
+@media(max-width:468px)
+{
+
+
+   .p-clubs-list {
+    grid-template-columns: 1fr;
+   }
+
+   #profilKlubaLabel, #profilIgracaLabel {
+    font-size: 2rem;
+  }
+
+
+
+}
+
+@media(max-width:510px)
+{
+    #playerImage {
+      display:none;
+    }
+ 
+
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 1200px;
+    margin: 1.75rem auto;
+  }
+  
+  #
+ }
 
 
 @media(max-width:768px)
@@ -306,53 +515,32 @@ body {
       margin-bottom: 2rem;
   }
 
-    .p-clubs-list {
-     grid-template-columns: 1fr 1fr;
-    }
+  .p-clubs-list {
+    grid-template-columns: 1fr 1fr;
+  }
 
-    #clubLogo {
-      display:none;
-    }
- 
-
-}
-
-@media(max-width:510px)
-{
-    #playerImage {
-      display:none;
-    }
+  #clubLogo {
+    display:none;
+  }
  
 
 }
 
 
-@media(max-width:468px)
-{
 
-
-   .p-clubs-list {
-    grid-template-columns: 1fr;
-   }
-
-
-
-}
 
  @media(max-width:950px)
 {
-    .card{
-        padding-top: 20px;
-    }
-    .row {
-        margin-bottom: 2rem;
-    }
+  .card{
+      padding-top: 20px;
+  }
+  .row {
+      margin-bottom: 2rem;
+  }
+  #myCarousel {
+    width: 80%;
+  }
 }
 
 
-@media (min-width: 576px) {
- .modal-dialog {
-   max-width: 1200px;
-   margin: 1.75rem auto;
- }
-}
+

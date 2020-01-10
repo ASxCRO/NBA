@@ -1,56 +1,68 @@
 jQuery(document).ready(function() {
 	jQuery(".loader").delay(1000).fadeOut("slow");
   jQuery("#overlayer").delay(1000).fadeOut("slow");
+  $( ".nav-link" ).hover(
+    function() {
+      $( this ).css('background-color','#000')
+    }
+  );
 });
-var NBAfranchise = [];
-var broj = 1;
-$.getJSON('https://api.allorigins.win/get?url=https%3A//data.nba.net/data/10s/prod/v1/2019/teams.json&callback=?', function (json) {
-  const allClubs = JSON.parse(json.contents);
-  const nbaClubs = allClubs.league.standard;
-  listOnlyNBAfranchise(nbaClubs);
-  if (window.location.pathname == '/clubs.html') {
-    NBAfranchise.forEach(element => {
-      var teamDiv = document.createElement('div');
-      teamDiv.setAttribute('class','team'); 
-      if(element.confName == 'East')
-      {
-        teamDiv.className += ' ' + element.confName.toLowerCase();
-      }
-      else
-      {
-        teamDiv.className += ' ' + element.confName.toLowerCase();
-      }
-      teamDiv.setAttribute('id',element.tricode)
-      var imgWrapper = document.createElement('div');
-      imgWrapper.setAttribute('class', 'img-wrapper');
-      var linkToModal = document.createElement('a')
-      linkToModal.setAttribute('href','#');
-      linkToModal.setAttribute('data-toggle','modal');
-      linkToModal.setAttribute('data-target','profilKlubaModal');
-      linkToModal.setAttribute('id',element.tricode);
-  
-      var clubImage = document.createElement('img');
-      clubImage.setAttribute('src','https://www.nba.com/assets/logos/teams/primary/web/'+element.tricode+'.svg');
-      teamDiv.append(imgWrapper);
-      teamDiv.append(linkToModal);
-      imgWrapper.append(linkToModal);
-      linkToModal.append(clubImage);
-      
-      var textBellowImg = document.createElement('a');
-      textBellowImg.setAttribute('href','#');
-      textBellowImg.setAttribute('data-toggle','modal');
-      textBellowImg.setAttribute('data-target','profilKlubaModal');
-      textBellowImg.innerText = element.fullName;
-      textBellowImg.setAttribute('id',element.tricode);
-  
-      teamDiv.append(textBellowImg);
-      jQuery('.p-clubs-list').append(teamDiv);
-    });
-  }
-  else if (window.location.pathname == '/players.html') {
-        FiltrirajIgraceKluba(2);
-  }
-});
+
+if(window.location.pathname == ( '/clubs.html') || ('/players.html') || ('/compare-players.html'))
+{
+  var NBAfranchise = [];
+  var broj = 1;
+  $.getJSON('https://api.allorigins.win/get?url=https%3A//data.nba.net/data/10s/prod/v1/2019/teams.json&callback=?', function (json) {
+    const allClubs = JSON.parse(json.contents);
+    const nbaClubs = allClubs.league.standard;
+    listOnlyNBAfranchise(nbaClubs);
+    if (window.location.pathname == '/clubs.html') {
+      NBAfranchise.forEach(element => {
+        var teamDiv = document.createElement('div');
+        teamDiv.setAttribute('class','team'); 
+        if(element.confName == 'East')
+        {
+          teamDiv.className += ' ' + element.confName.toLowerCase();
+        }
+        else
+        {
+          teamDiv.className += ' ' + element.confName.toLowerCase();
+        }
+        teamDiv.setAttribute('id',element.tricode)
+        var imgWrapper = document.createElement('div');
+        imgWrapper.setAttribute('class', 'img-wrapper');
+        var linkToModal = document.createElement('a')
+        linkToModal.setAttribute('href','#');
+        linkToModal.setAttribute('data-toggle','modal');
+        linkToModal.setAttribute('data-target','profilKlubaModal');
+        linkToModal.setAttribute('id',element.tricode);
+    
+        var clubImage = document.createElement('img');
+        clubImage.setAttribute('src','https://www.nba.com/assets/logos/teams/primary/web/'+element.tricode+'.svg');
+        teamDiv.append(imgWrapper);
+        teamDiv.append(linkToModal);
+        imgWrapper.append(linkToModal);
+        linkToModal.append(clubImage);
+        
+        var textBellowImg = document.createElement('a');
+        textBellowImg.setAttribute('href','#');
+        textBellowImg.setAttribute('data-toggle','modal');
+        textBellowImg.setAttribute('data-target','profilKlubaModal');
+        textBellowImg.innerText = element.fullName;
+        textBellowImg.setAttribute('id',element.tricode);
+    
+        teamDiv.append(textBellowImg);
+        jQuery('.p-clubs-list').append(teamDiv);
+      });
+    }
+    else if (window.location.pathname == '/players.html') {
+          FiltrirajIgraceKluba(2);
+    }
+    else if (window.location.pathname == '/compare-players.html') {
+
+    }
+  });
+}
 
 function listOnlyNBAfranchise(jsonObj) {
 
@@ -131,7 +143,7 @@ window.addEventListener("load", function(){
     }
     else {
       var table = $('#games-score').DataTable( {
-        "responsive": true
+        "scrollX": true
       });
     }
 
@@ -177,7 +189,7 @@ function FiltrirajUtakmice()
   }
   else {
     table = $('#games-score').DataTable( {
-      "responsive": true
+      "scrollX": true
     });
   }
 
@@ -232,7 +244,7 @@ function FiltrirajIgraceKluba(broj)
     }
     else {
       var tablePlayers = $('#club-players').DataTable( {
-        "responsive": true
+        "scrollX": true
       });
     }
     tablePlayers.clear();
@@ -245,7 +257,8 @@ function FiltrirajIgraceKluba(broj)
     }
     else {
         tablePlayersScore = $('#player-score').DataTable( {
-        "responsive": true
+          "scrollX": true,
+        
       });
     }
 
@@ -283,7 +296,7 @@ function FiltrirajIgraceKluba(broj)
         {
           position = player.teamSitesOnly.posFull;
         }
-        var button = '<div class="btn-group"><button type = "button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="edit"><span class="glyphicon glyphicon-option-vertical"></span></button><ul class="dropdown-menu"><li><a href="#" data-toggle="modal" data-target="#profilIgracaModal" id="prikaziProfilIgracaBtn" personid="'+player.personId+'">Player profile</a></li></ul></div>';
+        var button = '<div class="btn-group"><button type = "button" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="edit"><span></span><i class="fas fa-ellipsis-v"></i></button><ul class="dropdown-menu"><li><a href="#" class"draw-outline" data-toggle="modal" data-target="#profilIgracaModal" id="prikaziProfilIgracaBtn" personid="'+player.personId+'">Player profile</a></li></ul></div>';
         tablePlayersScore.row.add( [button, player.firstName, player.lastName, position, player.yearsPro, player.country] );
 
       });
@@ -303,11 +316,11 @@ function FiltrirajProfilIgraca(playerIdpar)
   }
   else {
     tablePlayerScore = $('#player-score-carrer').DataTable( {
+      "scrollX": true,
       "paging":   false,
       "ordering": false,
       "info":     false,
       "searching": false,
-      "responsive": true
     });
   }
   tablePlayerScore.clear();
@@ -341,7 +354,7 @@ function FiltrirajSezonuIgraca() {
       "ordering": false,
       "info":     false,
       "searching": false,
-      "responsive": true
+      "scrollX": true
     });
   }
   tablePlayerSeasonalScore.clear();
@@ -372,3 +385,4 @@ function FiltrirajSezonuIgraca() {
     });
   }
 }
+

@@ -13,13 +13,16 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.jqueryui.min.css">
     <link href="css/hover.css" rel="stylesheet" media="all">
+    <link href="css/animate.css" rel="stylesheet" media="all">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/all.css">
     <script src="./js/script.js"></script>
+    <script src="./js/all.js"></script>
 
 		<link href="css/scrolling-nav.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -36,17 +39,13 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger nav-item-style" href="clubs.html">Clubs</a>
+                        <a class="nav-link js-scroll-trigger nav-item-style hvr-shutter-in-horizontal" href="clubs.html">Clubs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger nav-item-style" href="players.html">Players</a>
+                        <a class="nav-link js-scroll-trigger nav-item-style hvr-shutter-in-horizontal" href="players.html">Players</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger nav-item-style" href="compare-clubs.html">Compare Clubs</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger nav-item-style" href="compare-players.html">Compare Players</a>
+                        <a class="nav-link js-scroll-trigger nav-item-style hvr-shutter-in-horizontal" href="compare-players.html">Compare Players</a>
                     </li>
                 </ul>
             </div>
@@ -64,7 +63,7 @@
     </div>
 
     <section class="p-player-list">
-      <table id="player-score" class="table table-striped table-bordered nowrap" style="width:100%">
+      <table id="player-score" class="table table-dark table-bordered nowrap" style="width:100%">
         <thead>
           <tr>
             <th></th>
@@ -99,7 +98,7 @@
 	      </div>
 	      <div class="modal-body">
           <h1>Carrer summary</h1>
-          <table id="player-score-carrer" class="table table-striped table-bordered nowrap" style="width:100%">
+          <table id="player-score-carrer" class="table table-dark table-bordered nowrap" style="width:100%">
             <thead>
               <tr>
                 <th><abbr title="Points Per Game">PPG</abbr></th>
@@ -118,7 +117,7 @@
           </table>
           <h1>Seasonal Player Stats</h1>
           <div id="filter-container">
-            <table id="filter-tablica" class="table table-striped">
+            <table id="filter-tablica" class="table table-dark">
               <thead>
                 <tr>
                   <th class="text-center">Year</th>
@@ -139,7 +138,7 @@
               </tbody>
             </table>
           </div>
-              <table id="player-score-season" class="table table-striped table-bordered nowrap" style="width:100%">
+              <table id="player-score-season" class="table table-dark table-bordered nowrap" style="width:100%">
                 <thead>
                   <tr>
                     <th><abbr title="Points Per Game">PPG</abbr></th>
@@ -158,7 +157,7 @@
          
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" data-dismiss="modal">Zatvori</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 	      </div>
 	    </div>
 	  </div>
