@@ -6,6 +6,7 @@ jQuery(document).ready(function() {
       $( this ).css('background-color','#000')
     }
   );
+
 });
 
 if(window.location.pathname == ( '/clubs.html') || ('/players.html') || ('/compare-players.html'))
@@ -180,6 +181,13 @@ window.addEventListener("load", function(){
     FiltrirajProfilIgraca(playerId);
     FiltrirajSezonuIgraca();
   });
+  $(document).delegate('.edit', 'click', function()
+  {
+    if($( ".playerInfoHover" ).hasClass( "draw-outline" ) == false)
+    {
+      $('.playerInfoHover').addClass('draw-outline');
+    }
+  });
 });
 
 function FiltrirajUtakmice()
@@ -226,11 +234,12 @@ function FiltrirajUtakmice()
             visitorClub = club.fullName;
           }
         });
-        table.row.add( [ homeClub, visitorClub, game.hTeam.score, game.vTeam.score ] ).draw();
+        table.row.add( [ homeClub, visitorClub, game.hTeam.score, game.vTeam.score ] );
       }
     });
+    table.draw();
+    table.columns.adjust();
   }
-  table.draw();
 }
 
 var players = [];
@@ -280,9 +289,11 @@ function FiltrirajIgraceKluba(broj)
     
         if(player.teamId == team.teamId )
         {
-          tablePlayers.row.add( [ player.firstName, player.lastName, player.teamSitesOnly.posFull, player.yearsPro, player.country] ).draw();
+          tablePlayers.row.add( [ player.firstName, player.lastName, player.teamSitesOnly.posFull, player.yearsPro, player.country] );
         }
       });
+      tablePlayers.draw();
+      tablePlayers.columns.adjust();
     }
     else if(broj == 2)
     {
@@ -296,11 +307,13 @@ function FiltrirajIgraceKluba(broj)
         {
           position = player.teamSitesOnly.posFull;
         }
-        var button = '<div class="btn-group"><button type = "button" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="edit"><span></span><i class="fas fa-ellipsis-v"></i></button><ul class="dropdown-menu"><li><a href="#" class"draw-outline" data-toggle="modal" data-target="#profilIgracaModal" id="prikaziProfilIgracaBtn" personid="'+player.personId+'">Player profile</a></li></ul></div>';
+        var button = '<div class="btn-group"><button type = "button" class="edit btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span></span><i class="fas fa-ellipsis-v"></i></button><ul class="dropdown-menu"><li><a class="playerInfoHover" href="#" data-toggle="modal" data-target="#profilIgracaModal" id="prikaziProfilIgracaBtn" personid="'+player.personId+'">Player profile</a></li></ul></div>';
         tablePlayersScore.row.add( [button, player.firstName, player.lastName, position, player.yearsPro, player.country] );
 
       });
       tablePlayersScore.draw();
+      tablePlayersScore.columns.adjust();
+      
     }
   }
 }
@@ -328,8 +341,6 @@ function FiltrirajProfilIgraca(playerIdpar)
 	let requestURLplayers = 'https://ancient-lake-18259.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/players/'+playerIdpar+'_profile.json';
   let requestPlayers = new XMLHttpRequest();
   requestPlayers.open('GET', requestURLplayers);
-  requestPlayers.setRequestHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
-  requestPlayers.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   requestPlayers.responseType = 'json';
   requestPlayers.send();
 
@@ -339,6 +350,7 @@ function FiltrirajProfilIgraca(playerIdpar)
 
     tablePlayerScore.row.add( [ PlayerCarrer.ppg, PlayerCarrer.rpg, PlayerCarrer.bpg, PlayerCarrer.mpg, PlayerCarrer.assists,PlayerCarrer.blocks,PlayerCarrer.steals,PlayerCarrer.turnovers,PlayerCarrer.gamesPlayed] ).draw();  
   }
+  tablePlayerScore.columns.adjust();
 }
 
 var AllPlayerSeasons = 0;
@@ -368,8 +380,6 @@ function FiltrirajSezonuIgraca() {
 	let requestURLplayerSeason = 'https://ancient-lake-18259.herokuapp.com/https://data.nba.net/data/10s/prod/v1/'+trazenaGodina+'/players/'+playerId+'_profile.json';
   let requestPlayerSeason = new XMLHttpRequest();
   requestPlayerSeason.open('GET', requestURLplayerSeason);
-  requestPlayerSeason.setRequestHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
-  requestPlayerSeason.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   requestPlayerSeason.responseType = 'json';
   requestPlayerSeason.send();
 
@@ -380,9 +390,11 @@ function FiltrirajSezonuIgraca() {
       if(season.seasonYear == trazenaGodina)
       {
         let demandedPlayerSeasonTotal = season.total;
-        tablePlayerSeasonalScore.row.add( [ demandedPlayerSeasonTotal.ppg, demandedPlayerSeasonTotal.rpg, demandedPlayerSeasonTotal.bpg, demandedPlayerSeasonTotal.mpg, demandedPlayerSeasonTotal.assists,demandedPlayerSeasonTotal.blocks,demandedPlayerSeasonTotal.steals,demandedPlayerSeasonTotal.turnovers,demandedPlayerSeasonTotal.gamesPlayed] ).draw();  
+        tablePlayerSeasonalScore.row.add( [ demandedPlayerSeasonTotal.ppg, demandedPlayerSeasonTotal.rpg, demandedPlayerSeasonTotal.bpg, demandedPlayerSeasonTotal.mpg, demandedPlayerSeasonTotal.assists,demandedPlayerSeasonTotal.blocks,demandedPlayerSeasonTotal.steals,demandedPlayerSeasonTotal.turnovers,demandedPlayerSeasonTotal.gamesPlayed] );  
       }
     });
+    tablePlayerSeasonalScore.draw();
+    tablePlayerSeasonalScore.columns.adjust();
   }
 }
 

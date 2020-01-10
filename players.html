@@ -5,26 +5,16 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>NBA | Players</title>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-    crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.jqueryui.min.css">
-    <link href="css/hover.css" rel="stylesheet" media="all">
-    <link href="css/animate.css" rel="stylesheet" media="all">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="./js/script.js"></script>
+    <link rel="stylesheet" href="css/all.css">
     <script src="./js/all.js"></script>
-
-		<link href="css/scrolling-nav.css" rel="stylesheet">
+    <link href="css/hover.css" rel="stylesheet" media="all">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -44,6 +34,8 @@
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger nav-item-style hvr-shutter-in-horizontal" href="players.html">Players</a>
                     </li>
+
+
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger nav-item-style hvr-shutter-in-horizontal" href="compare-players.html">Compare Players</a>
                     </li>
@@ -63,8 +55,8 @@
     </div>
 
     <section class="p-player-list">
-      <table id="player-score" class="table table-dark table-bordered nowrap" style="width:100%">
-        <thead>
+      <table id="player-score" class="table table-hover table-bordered nowrap" style="width:100%">
+        <thead class="thead-dark">
           <tr>
             <th></th>
             <th>Firstname</th>
@@ -98,8 +90,8 @@
 	      </div>
 	      <div class="modal-body">
           <h1>Carrer summary</h1>
-          <table id="player-score-carrer" class="table table-dark table-bordered nowrap" style="width:100%">
-            <thead>
+          <table id="player-score-carrer" class="table table-hover table-bordered nowrap" style="width:100%">
+            <thead class="thead-dark">
               <tr>
                 <th><abbr title="Points Per Game">PPG</abbr></th>
                 <th><abbr title="Rebounds Per Game">RPG</abbr></th>
@@ -138,8 +130,8 @@
               </tbody>
             </table>
           </div>
-              <table id="player-score-season" class="table table-dark table-bordered nowrap" style="width:100%">
-                <thead>
+              <table id="player-score-season" class="table table-hover table-bordered nowrap" style="width:100%">
+                <thead class="thead-dark">
                   <tr>
                     <th><abbr title="Points Per Game">PPG</abbr></th>
                     <th><abbr title="Rebounds Per Game">RPG</abbr></th>
@@ -162,7 +154,6 @@
 	    </div>
 	  </div>
   </div>
-  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   <script>
 
   </script>
