@@ -316,15 +316,12 @@ th,td {
 }
 
 .hvr-underline-from-right:before {
-
   background: #dc4225;
-
 }
 
 .hvr-shutter-in-horizontal {
   display: inline-block;
   height: 100%;
-  width: 100%;
   padding: 16px 28px;
   background: #555555;
   text-align: center;
@@ -332,6 +329,10 @@ th,td {
   color: black;
   position: relative;
   z-index: 1;
+}
+
+#prikaziProfilIgracaBtn {
+  width: 100%;
 }
 
 .hvr-shutter-in-horizontal:hover {
