@@ -6,7 +6,10 @@ jQuery(document).ready(function() {
       $( this ).css('background-color','#000')
     }
   );
-
+  window.addEventListener('error', function(e) {
+    console.log(e);
+    alert('There is not existent data for your query, please select different year.')
+}, true);
 });
 
 if(window.location.pathname == ( '/clubs.html') || ('/players.html') || ('/compare-players.html'))
@@ -135,10 +138,8 @@ window.addEventListener("load", function(){
         sRedak += '</tr>';
       
         $('#overall-score tbody').append(sRedak);
-
       }
     });
-    var Redak='<tr>';
     if ( $.fn.dataTable.isDataTable( '#games-score' )  ) {  
       var table = $('#games-score').DataTable();
     }
@@ -148,7 +149,6 @@ window.addEventListener("load", function(){
       });
     }
 
-    table.clear();
     FiltrirajUtakmice();
     FiltrirajIgraceKluba(1);
 
@@ -172,7 +172,6 @@ window.addEventListener("load", function(){
             $('#clubLogo').attr('title', club.fullName);
             $('#playerImage').attr('src','https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/'+playerId+'.png');
             $('#playerImage').attr('title', player.firstName + ' ' + player.lastName);
-
           }
         
         });
@@ -183,9 +182,10 @@ window.addEventListener("load", function(){
   });
   $(document).delegate('.edit', 'click', function()
   {
-    if($( ".playerInfoHover" ).hasClass( "draw-outline" ) == false)
+    if($( ".playerInfoHover" ).hasClass( "hvr-shutter-in-horizontal" ) == false)
     {
-      $('.playerInfoHover').addClass('draw-outline');
+      console.log("ulaz");
+      $('.playerInfoHover').addClass('hvr-shutter-in-horizontal');
     }
   });
 });
@@ -201,7 +201,6 @@ function FiltrirajUtakmice()
     });
   }
 
-  table.clear();
   var trazenaGodina = $('#dpdnGodina').val();
   if(trazenaGodina == undefined)
   {
@@ -237,6 +236,7 @@ function FiltrirajUtakmice()
         table.row.add( [ homeClub, visitorClub, game.hTeam.score, game.vTeam.score ] );
       }
     });
+  
     table.draw();
     table.columns.adjust();
   }
@@ -256,7 +256,6 @@ function FiltrirajIgraceKluba(broj)
         "scrollX": true
       });
     }
-    tablePlayers.clear();
 
   }
   else if(broj == 2)
@@ -307,23 +306,32 @@ function FiltrirajIgraceKluba(broj)
         {
           position = player.teamSitesOnly.posFull;
         }
+        var club = '';
         var button = '<div class="btn-group"><button type = "button" class="edit btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span></span><i class="fas fa-ellipsis-v"></i></button><ul class="dropdown-menu"><li><a class="playerInfoHover" href="#" data-toggle="modal" data-target="#profilIgracaModal" id="prikaziProfilIgracaBtn" personid="'+player.personId+'">Player profile</a></li></ul></div>';
-        tablePlayersScore.row.add( [button, player.firstName, player.lastName, position, player.yearsPro, player.country] );
-
+        NBAfranchise.forEach(team => {
+          if(team.teamId == player.teamId)
+          {
+            club = team.fullName;
+          }
+        });
+        tablePlayersScore.row.add( [button, player.firstName, player.lastName,club, position, player.yearsPro, player.country] );
+        
       });
       tablePlayersScore.draw();
       tablePlayersScore.columns.adjust();
-      
     }
   }
 }
 
 var PlayerCarrer = 0;
 var tablePlayerScore  = 0;
-
+var trazenaGodina = '';
+var allPlayerInfo = '';
 function FiltrirajProfilIgraca(playerIdpar)
 {
-
+  if ($("#dpdnGodina").children().length > 0) {
+    $("#dpdnGodina").empty();
+  }
   if ( $.fn.dataTable.isDataTable( '#player-score-carrer' )  ) {  
     tablePlayerScore = $('#player-score-carrer').DataTable();
   }
@@ -345,7 +353,7 @@ function FiltrirajProfilIgraca(playerIdpar)
   requestPlayers.send();
 
   requestPlayers.onload = function() {
-    let allPlayerInfo = requestPlayers.response;
+    allPlayerInfo = requestPlayers.response;
     PlayerCarrer = allPlayerInfo['league']['standard']['stats']['careerSummary'];
 
     tablePlayerScore.row.add( [ PlayerCarrer.ppg, PlayerCarrer.rpg, PlayerCarrer.bpg, PlayerCarrer.mpg, PlayerCarrer.assists,PlayerCarrer.blocks,PlayerCarrer.steals,PlayerCarrer.turnovers,PlayerCarrer.gamesPlayed] ).draw();  
@@ -355,6 +363,7 @@ function FiltrirajProfilIgraca(playerIdpar)
 
 var AllPlayerSeasons = 0;
 var tablePlayerSeasonalScore = 0;
+var demandedPlayerSeasonTotal = 0;
 
 function FiltrirajSezonuIgraca() {
   if ( $.fn.dataTable.isDataTable( '#player-score-season' )  ) {  
@@ -371,30 +380,55 @@ function FiltrirajSezonuIgraca() {
   }
   tablePlayerSeasonalScore.clear();
 
-  var trazenaGodina = $('#dpdnGodina').val();
-  if(trazenaGodina == undefined)
+  trazenaGodina = $('#dpdnGodina').val();
+  if(trazenaGodina == null)
   {
     trazenaGodina = '2019';
   }
 
-	let requestURLplayerSeason = 'https://ancient-lake-18259.herokuapp.com/https://data.nba.net/data/10s/prod/v1/'+trazenaGodina+'/players/'+playerId+'_profile.json';
+	let requestURLplayerSeason = 'https://ancient-lake-18259.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/players/'+playerId+'_profile.json';
   let requestPlayerSeason = new XMLHttpRequest();
   requestPlayerSeason.open('GET', requestURLplayerSeason);
   requestPlayerSeason.responseType = 'json';
-  requestPlayerSeason.send();
-
-  requestPlayerSeason.onload = function() {
-    let allPlayerInfo = requestPlayerSeason.response;
-    AllPlayerSeasons = allPlayerInfo['league']['standard']['stats']['regularSeason']['season'];
-    AllPlayerSeasons.forEach(season => {
-      if(season.seasonYear == trazenaGodina)
-      {
-        let demandedPlayerSeasonTotal = season.total;
-        tablePlayerSeasonalScore.row.add( [ demandedPlayerSeasonTotal.ppg, demandedPlayerSeasonTotal.rpg, demandedPlayerSeasonTotal.bpg, demandedPlayerSeasonTotal.mpg, demandedPlayerSeasonTotal.assists,demandedPlayerSeasonTotal.blocks,demandedPlayerSeasonTotal.steals,demandedPlayerSeasonTotal.turnovers,demandedPlayerSeasonTotal.gamesPlayed] );  
-      }
-    });
-    tablePlayerSeasonalScore.draw();
-    tablePlayerSeasonalScore.columns.adjust();
+  try {
+      requestPlayerSeason.send();
   }
-}
+  catch(error) {
+    console.error(error.message);
+    alert('Data for that certain query does not exist, view console for more.');
+  }
+  finally {
+    requestPlayerSeason.onload = function() {
+      let allPlayerInfo = requestPlayerSeason.response;
+      AllPlayerSeasons = allPlayerInfo['league']['standard']['stats']['regularSeason']['season'];
+      AllPlayerSeasons.forEach(season => {
+        if($("#dpdnGodina").children().length < AllPlayerSeasons.length)
+        {
+          var optionYear = document.createElement('option', { value : season.seasonYear});
+          if(season.seasonYear == '2019'){
+            $(optionYear).attr('selected','selected');
+          }
+          optionYear.innerText = season.seasonYear;
+          $('#dpdnGodina').append(optionYear);
+        }
+        if(season.seasonYear == trazenaGodina)
+        {
+          demandedPlayerSeasonTotal = season.total;
+          let playerGamesPlayed = demandedPlayerSeasonTotal.gamesPlayed;
+          
+          if( playerGamesPlayed == undefined)
+          {
+            playerGamesPlayed = 'NoData';
+          }
+          tablePlayerSeasonalScore.clear();
+          tablePlayerSeasonalScore.row.add( [ demandedPlayerSeasonTotal.ppg, demandedPlayerSeasonTotal.rpg, demandedPlayerSeasonTotal.bpg, demandedPlayerSeasonTotal.mpg, demandedPlayerSeasonTotal.assists,demandedPlayerSeasonTotal.blocks,demandedPlayerSeasonTotal.steals,demandedPlayerSeasonTotal.turnovers,playerGamesPlayed] );  
+        }
+      });
+      tablePlayerSeasonalScore.draw();
+      tablePlayerSeasonalScore.columns.adjust();
+    }
+  }
+  
 
+
+}

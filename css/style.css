@@ -321,7 +321,24 @@ th,td {
 
 }
 
+.hvr-shutter-in-horizontal {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  padding: 16px 28px;
+  background: #555555;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  position: relative;
+  z-index: 1;
+}
 
+.hvr-shutter-in-horizontal:hover {
+  color: #fff;
+  background-color: #555555;
+  text-decoration: none;
+}
 
 .draw-outline {
   display: inline-block;
@@ -491,7 +508,6 @@ label {
 
 .page-link {
   display: table;
-
   color: #8f8d8d;
 
 }
@@ -503,8 +519,6 @@ label {
 .pagination {
   flex-wrap: wrap;
 }
-
-
 
 
 

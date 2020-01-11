@@ -11,6 +11,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
     <script src="./js/script.js"></script>
     <link rel="stylesheet" href="css/all.css">
     <script src="./js/all.js"></script>
@@ -61,6 +63,7 @@
             <th></th>
             <th>Firstname</th>
             <th>Lastname</th>
+            <th>Team</th>
             <th>Position</th>
             <th>Years Pro</th>
             <th>Country</th>
@@ -119,11 +122,6 @@
                 <tr>
                   <td class="text-center">
                     <select class="form-control" id="dpdnGodina" onchange="FiltrirajSezonuIgraca()">
-                      <option value="2019" selected>2019</option>
-                      <option value="2018">2018</option>
-                      <option value="2017">2017</option>
-                      <option value="2016">2016</option>
-                      <option value="2015">2015</option>
                     </select>
                   </td>
                 </tr>
@@ -141,6 +139,7 @@
                     <th>Blocks</th>
                     <th>Steals</th>
                     <th>Turnovers</th>
+                    <th>Games Played</th>
                   </tr>
                 </thead>
                 <tbody>
