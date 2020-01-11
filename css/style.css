@@ -561,7 +561,7 @@ label {
  }
 
 
-@media(max-width:768px)
+@media(min-width: 467px) and (max-width:768px)
 {
 
  .wrap-cards {
