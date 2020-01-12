@@ -240,9 +240,10 @@ body {
 .modal-header{
 
 
-  height: 200px;
+  /* height: 200px; */
   position: relative;
   width: 100%;
+  padding: 1rem 1rem 0 1rem;
   background-size: cover;
   overflow: hidden;
 
@@ -551,16 +552,22 @@ label {
 }
 
 .hvr-shutter-in-vertical:before {
-
   background: #343a40;
-
 }
 
+.flex-container-compare {
+  display: flex;
+  width: 90%;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.flex-container-compare img {
+  
+}
 
 .hvr-bounce-to-top:before {
- 
   background: #343a40;
-
 }
 
 
@@ -574,7 +581,6 @@ label {
       max-width: 280px;
       margin: 1.75rem auto;
   }
-
   #playerImageLeft {
     max-width: 23%;
   }
