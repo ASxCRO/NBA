@@ -564,11 +564,11 @@ label {
 }
 
 
-.modal-open .modal {
+/* .modal-open .modal {
   display: flex !important;
   align-items: center;
   justify-content: center;
-}
+} */
 @media (min-width: 300px) {
   .modal-dialog {
       max-width: 280px;
@@ -719,12 +719,12 @@ label {
 
 
 
-.modal.show .modal-dialog {
+/* .modal.show .modal-dialog {
   -webkit-transform: none;
   transform: none;
   position: absolute;
   top: inherit;
-}
+} */
 
 .svg-container {
   width: 100%;
