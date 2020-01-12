@@ -63,11 +63,8 @@ if(window.location.pathname == ( '/clubs.html') || ('/players.html') || ('/compa
         jQuery('.p-clubs-list').append(teamDiv);
       });
     }
-    else if (window.location.pathname == '/players.html') {
+    else if (window.location.pathname == '/players.html' || window.location.pathname == '/compare-players.html') {
           FiltrirajIgraceKluba(2);
-    }
-    else if (window.location.pathname == '/compare-players.html') {
-
     }
   });
 }
@@ -81,6 +78,7 @@ function listOnlyNBAfranchise(jsonObj) {
   }
 }
 
+var playerId = 0;
 if (window.location.pathname == '/clubs.html') {
   var team = 0;
   var teamStandingsEast = [];
@@ -102,7 +100,7 @@ if (window.location.pathname == '/clubs.html') {
   }
 
   var games = [];
-  var playerId = 0;
+
 
 
   let requestURLgames = 'https://ancient-lake-18259.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/schedule.json';
@@ -118,7 +116,9 @@ if (window.location.pathname == '/clubs.html') {
     games = gamesAll['league']['standard'];
   }
 }
-
+var inputCompareFirst = undefined;
+var inputCompareSecond = undefined;
+var element = undefined;
 window.addEventListener("load", function(){
   $('.team a').click(function () {
     teamStandingsAll.forEach(element => {
@@ -213,7 +213,40 @@ window.addEventListener("load", function(){
     }
 
   });
+  inputCompareFirst = $('#firstPlayerForComparison');
+  inputCompareSecond = $('#secondPlayerForComparison');
+  $(document).delegate('#buttonCompareFirst', 'click', function()
+  {
+    playerId = $(this).attr('personid');
+    getPlayerCompare(playerId);
+    if(inputCompareSecond.val() == (playerForComparison.firstName + ' ' + playerForComparison.lastName)|| inputCompareFirst.val()  == (playerForComparison.firstName + ' ' + playerForComparison.lastName))
+    {
+      bootbox.alert("You already selected that player for comparison.<br>Please select different player.");
+    }
+    else {
+      inputCompareFirst.val(playerForComparison.firstName + ' ' + playerForComparison.lastName)
+      inputCompareFirst.attr('personid',playerId);
+      inputCompareFirst.attr('teamid',playerForComparison.teamId);
+    }
+  });
+  $(document).delegate('#buttonCompareSecond', 'click', function()
+  {
+    
+    playerId = $(this).attr('personid');
+    getPlayerCompare(playerId);
+    if(inputCompareSecond.val() == (playerForComparison.firstName + ' ' + playerForComparison.lastName)|| inputCompareFirst.val()  == (playerForComparison.firstName + ' ' + playerForComparison.lastName))
+    {
+     bootbox.alert("You already selected that player for comparison.<br>Please select different player.");
+    }
+    else {
+      inputCompareSecond.val(playerForComparison.firstName + ' ' + playerForComparison.lastName)
+      inputCompareSecond.attr('personid',playerId);
+      inputCompareSecond.attr('teamid',playerForComparison.teamId);
+    }
+  });
 });
+var playerForComparison = undefined;
+
 
 
 var table = undefined;
@@ -317,10 +350,8 @@ function FiltrirajIgraceKluba(broj)
             tablePlayers.row.add( [ player.firstName, player.lastName, player.teamSitesOnly.posFull, player.yearsPro, player.country] );
           }
         });
-
         tablePlayers.draw();
         tablePlayers.columns.adjust();
-
       case 2:
         var position = '';
         players.forEach(player => {
@@ -333,20 +364,33 @@ function FiltrirajIgraceKluba(broj)
             position = player.teamSitesOnly.posFull;
           }
           var club = '';
-          var button = '<div class="btn-group"><button type = "button" class="edit btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span></span><i class="fas fa-ellipsis-v"></i></button><ul class="dropdown-menu"><li><a class="playerInfoHover" href="#" data-toggle="modal" data-target="#profilIgracaModal" id="prikaziProfilIgracaBtn" personid="'+player.personId+'">Player profile</a></li></ul></div>';
+          if(window.location.pathname == '/players.html')
+          {
+            var button = '<div class="btn-group"><button type = "button" class="edit btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span></span><i class="fas fa-ellipsis-v"></i></button><ul class="dropdown-menu"><li><a class="playerInfoHover" href="#" data-toggle="modal" data-target="#profilIgracaModal" id="prikaziProfilIgracaBtn" personid="'+player.personId+'">Player profile</a></li></ul></div>';
+          }
+          else
+          {
+            var buttonCompareFirst = '<button  personid="'+player.personId+'" id="buttonCompareFirst" type = "button" class="edit btn btn-default hvr-bounce-to-top"><span></span><i class="far fa-bookmark fa-3x" title="First Player For Comparison"></i></button>';
+            var buttonCompareSecond = '<button  personid="'+player.personId+'" id="buttonCompareSecond" type = "button" class="edit btn btn-default hvr-bounce-to-top"><span></span><i title="Second Player For Comparison" class="fas fa-bookmark fa-3x"></i></button>';
+          }
           NBAfranchise.forEach(team => {
             if(team.teamId == player.teamId)
             {
               club = team.fullName;
             }
           });
-          tablePlayersScore.row.add( [button, player.firstName, player.lastName,club, position, player.yearsPro, player.country] );
+          if(window.location.pathname == '/players.html')
+          {
+            tablePlayersScore.row.add( [button, player.firstName, player.lastName,club, position, player.yearsPro, player.country] );
+          }
+          else
+          {
+            tablePlayersScore.row.add( [buttonCompareFirst, buttonCompareSecond, player.firstName, player.lastName,club, position, player.yearsPro, player.country] );
+          }
         });
 
         tablePlayersScore.draw();
         tablePlayersScore.columns.adjust();
-
-       
       default:
         break;
     }
@@ -434,7 +478,7 @@ function FiltrirajSezonuIgraca() {
       AllPlayerSeasons.forEach(season => {
         if($("#dpdnGodina").children().length < AllPlayerSeasons.length)
         {
-          var optionYear = document.createElement('option', { value : season.seasonYear});
+          var optionYear = document.createElement('option', {value : season.seasonYear});
           if(season.seasonYear == '2019'){
             $(optionYear).attr('selected','selected');
           }
@@ -457,7 +501,143 @@ function FiltrirajSezonuIgraca() {
       tablePlayerSeasonalScore.columns.adjust();
     }
   }
-  
+}
 
+function getPlayerCompare(playerIdcompare)
+{
+  players.forEach(player => {
+    if(player.personId == playerIdcompare)
+    {
+      playerForComparison = player;
+    }
+  });
+}
+
+var traceFirstPlayerCompareGeneral = undefined; 
+var traceSecondPlayerComparGeneral = undefined; 
+var traceFirstPlayerComparePerGame = undefined; 
+var traceSecondPlayerComparPerGame = undefined; 
+var dataGeneral = undefined;
+var dataPerGame = undefined;
+var layoutGeneral = undefined;
+var layOutPerGame = undefined;
+
+function ComparePlayers()
+{
+
+  NBAfranchise.forEach(club => {
+    if(club.teamId == inputCompareFirst.attr('teamid'))
+    {
+      $('#clubLogoLeft').attr('src','https://www.nba.com/assets/logos/teams/primary/web/'+club.tricode+'.svg');
+      $('#clubLogoLeft').attr('title',club.fullName);
+    }
+    else if(club.teamId == inputCompareSecond.attr('teamid'))
+    {
+      $('#clubLogoRight').attr('src','https://www.nba.com/assets/logos/teams/primary/web/'+club.tricode+'.svg');
+      $('#clubLogoRight').attr('title',club.fullName);
+
+    }
+  });
+
+  $('#playerImageLeft').attr('src','https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/'+inputCompareFirst.attr('personid')+'.png');
+  $('#playerImageLeft').attr('title',inputCompareFirst.val());
+  $('#playerImageRight').attr('src','https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/'+inputCompareSecond.attr('personid')+'.png');
+  $('#playerImageRight').attr('title',inputCompareSecond.val());
+
+
+
+  let requestURLplayers = 'https://ancient-lake-18259.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/players/'+inputCompareFirst.attr('personid')+'_profile.json';
+  let requestPlayers = new XMLHttpRequest();
+  requestPlayers.open('GET', requestURLplayers);
+  requestPlayers.responseType = 'json';
+  requestPlayers.send();
+  
+  requestPlayers.onload = function() {
+    allPlayerInfo = requestPlayers.response;
+    PlayerCarrer = allPlayerInfo['league']['standard']['stats']['careerSummary'];
+
+
+    traceFirstPlayerComparePerGame = {
+      x: ['PPG', 'RPG', 'BPG', 'MPG'],
+      y: [PlayerCarrer.ppg, PlayerCarrer.rpg, PlayerCarrer.bpg, PlayerCarrer.mpg],
+      type: 'bar',
+      name: inputCompareFirst.val(),
+      marker: {
+        color: 'rgb(49,130,189)',
+        opacity: 0.7,
+      }
+    };
+    traceFirstPlayerCompareGeneral = {
+      x: ['ASSISTS', 'BLOCKS', 'STEALS', 'TURNOVERS', 'GAMES PLAYED'],
+      y: [PlayerCarrer.assists,PlayerCarrer.blocks,PlayerCarrer.steals,PlayerCarrer.turnovers,PlayerCarrer.gamesPlayed],
+      type: 'bar',
+      name: inputCompareFirst.val(),
+      marker: {
+        color: 'rgb(49,130,189)',
+        opacity: 0.7,
+      }
+    };
+
+  }
+
+
+
+  let requestURLplayersSecond = 'https://ancient-lake-18259.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/players/'+inputCompareSecond.attr('personid')+'_profile.json';
+  let requestPlayersSecond = new XMLHttpRequest();
+  requestPlayersSecond.open('GET', requestURLplayersSecond);
+  requestPlayersSecond.responseType = 'json';
+  requestPlayersSecond.send();
+  
+  requestPlayersSecond.onload = function() {
+    allPlayerInfo = requestPlayersSecond.response;
+    PlayerCarrer = allPlayerInfo['league']['standard']['stats']['careerSummary'];
+
+    traceSecondPlayerComparePerGame= {
+      x: ['PPG', 'RPG', 'BPG', 'MPG'],
+      y: [PlayerCarrer.ppg, PlayerCarrer.rpg, PlayerCarrer.bpg, PlayerCarrer.mpg],
+      type: 'bar',
+      name: inputCompareSecond.val(),
+      marker: {
+        color: 'rgb(204,204,204)',
+        opacity: 0.5
+      }
+    };
+    traceSecondPlayerCompareGeneral = {
+      x: ['ASSISTS', 'BLOCKS', 'STEALS', 'TURNOVERS', 'GAMES PLAYED'],
+      y: [PlayerCarrer.assists,PlayerCarrer.blocks,PlayerCarrer.steals,PlayerCarrer.turnovers,PlayerCarrer.gamesPlayed],
+      type: 'bar',
+      name: inputCompareSecond.val(),
+      marker: {
+        color: 'rgb(204,204,204)',
+        opacity: 0.5
+      }
+    };
+    dataGeneral = [traceFirstPlayerCompareGeneral, traceSecondPlayerCompareGeneral];
+    dataPerGame = [traceFirstPlayerComparePerGame, traceSecondPlayerComparePerGame];
+    layoutGeneral = {
+      title: 'Players Comparison General (Carrer)',
+      xaxis: {
+        tickangle: -45
+      },
+      barmode: 'group'
+    };
+    layOutPerGame = {
+      title: 'Players Comparison Per Game (Carrer)',
+      xaxis: {
+        tickangle: -45
+      },
+      barmode: 'group'
+    };
+   Plotly.newPlot('comparePlayersModalBodyGeneral', dataGeneral, layoutGeneral,{ responsive: true });
+   Plotly.newPlot('comparePlayersModalBodyPerGame', dataPerGame, layOutPerGame, { responsive: true });
+    
+
+  }
+
+
+  
+ 
+
+ 
 
 }

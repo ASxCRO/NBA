@@ -280,13 +280,10 @@ body {
   color: #555555;
 }
 
-#clubLogo {
+.modal img {
   z-index: 10;
 }
 
-#playerImage {
-  z-index: 10;
-}
 
 .modal-header .close {
   margin-left:0;
@@ -331,7 +328,7 @@ th,td {
   z-index: 1;
 }
 
-#prikaziProfilIgracaBtn {
+.playerInfoHover {
   width: 100%;
 }
 
@@ -521,6 +518,126 @@ label {
   flex-wrap: wrap;
 }
 
+#comparePlayersForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-group ,#comparePlayersForm button , #comparePlayersForm input{
+  width: 70%;
+}
+
+#comparePlayersForm label, #comparePlayersForm small {
+  text-align: left;
+}
+
+#comparePlayersForm input {
+  width: 100%
+}
+
+hr {
+	height: 10px;
+	border: 0;
+	box-shadow: 0 10px 10px -10px #8c8b8b inset;
+}
+
+#comparePlayersForm .btn-primary {
+  border-color: #8c8b8b;
+  background: #0f0f0f;
+  color:#fff;
+}
+
+.hvr-shutter-in-vertical:before {
+
+  background: #343a40;
+
+}
+
+
+.hvr-bounce-to-top:before {
+ 
+  background: #343a40;
+
+}
+
+
+.modal-open .modal {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 300px) {
+  .modal-dialog {
+      max-width: 280px;
+      margin: 1.75rem auto;
+  }
+
+  #playerImageLeft {
+    max-width: 23%;
+  }
+  #clubLogoLeft {
+    max-width: 23%;
+  }
+  #clubLogoRight {
+    max-width: 23%;
+  }
+  #playerImageRight {
+    max-width: 23%;
+  }
+}
+
+
+@media (min-width: 400px) {
+  .modal-dialog {
+      max-width: 380px;
+      margin: 1.75rem auto;
+  }
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+      max-width: 550px;
+      margin: 1.75rem auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .modal-dialog {
+      max-width: 700px;
+      margin: 1.75rem auto;
+  }
+}
+
+
+@media (min-width: 1250px) {
+  .modal-dialog {
+      max-width: 1300px;
+      margin: 1.75rem auto;
+  }
+}
+
+
+.modal.show #comparePlayersModalDialog {
+  -webkit-transform: none;
+  transform: none;
+  position: absolute;
+  top: inherit;
+}
+
+.svg-container {
+  width: 100%;
+}
+
+
+/* @media (min-width: 769px) {
+  .modal-dialog {
+    max-width: 1200px;
+    margin: 1.75rem auto;
+  }
+ } */
 
 
 @media(max-width:468px)
@@ -551,14 +668,6 @@ label {
 
 }
 
-@media (min-width: 576px) {
-  .modal-dialog {
-    max-width: 1200px;
-    margin: 1.75rem auto;
-  }
-  
-  
- }
 
 
 @media(min-width: 467px) and (max-width:768px)
