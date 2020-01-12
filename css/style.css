@@ -538,7 +538,7 @@ label {
   width: 100%
 }
 
-hr {
+.divide {
 	height: 10px;
 	border: 0;
 	box-shadow: 0 10px 10px -10px #8c8b8b inset;
@@ -619,8 +619,107 @@ hr {
   }
 }
 
+@media(max-width:468px){
 
-.modal.show #comparePlayersModalDialog {
+
+  .p-clubs-list {
+   grid-template-columns: 1fr;
+  }
+
+  #profilKlubaLabel, #profilIgracaLabel {
+   font-size: 2rem;
+ }
+
+
+
+}
+
+@media(max-width:510px)
+{
+    /*#playerImage {
+     display:none;
+   }*/
+
+   #clubLogo {
+     display:none;
+   } 
+
+}
+
+
+
+@media(min-width: 300px) and (max-width:768px)
+{
+
+.wrap-cards {
+  grid-template-columns: 1fr;
+  }
+
+ .row {
+     margin-bottom: 2rem;
+ }
+
+ .p-clubs-list {
+   grid-template-columns: 1fr 1fr;
+ }
+
+
+
+
+}
+
+
+
+
+@media(max-width:950px)
+{
+ .card{
+     padding-top: 20px;
+ }
+ .row {
+     margin-bottom: 2rem;
+ }
+ #myCarousel {
+   width: 80%;
+ }
+
+ .navbar-nav {
+   align-items: center;
+ }
+ .navbar-dark .navbar-nav .nav-link {
+   margin-bottom: 0.4rem;
+   width: 70%;
+   text-align: center;
+ }
+
+ .nav-item {
+   width: 100%;
+ }
+}
+
+@media(max-width:991px)
+{
+ .navbar-nav {
+   align-items: center;
+ }
+ .navbar-dark .navbar-nav .nav-link {
+   margin-bottom: 0.4rem;
+   width: 70%;
+   text-align: center;
+ }
+
+ .nav-item {
+   width: 100%;
+ }
+}
+
+
+
+
+
+
+
+.modal.show .modal-dialog {
   -webkit-transform: none;
   transform: none;
   position: absolute;
@@ -638,103 +737,5 @@ hr {
     margin: 1.75rem auto;
   }
  } */
-
-
-@media(max-width:468px)
-{
-
-
-   .p-clubs-list {
-    grid-template-columns: 1fr;
-   }
-
-   #profilKlubaLabel, #profilIgracaLabel {
-    font-size: 2rem;
-  }
-
-
-
-}
-
-@media(max-width:510px)
-{
-     /*#playerImage {
-      display:none;
-    }*/
- 
-    #clubLogo {
-      display:none;
-    } 
-
-}
-
-
-
-@media(min-width: 467px) and (max-width:768px)
-{
-
- .wrap-cards {
-   grid-template-columns: 1fr;
-   }
-
-  .row {
-      margin-bottom: 2rem;
-  }
-
-  .p-clubs-list {
-    grid-template-columns: 1fr 1fr;
-  }
-
-
- 
-
-}
-
-
-
-
- @media(max-width:950px)
-{
-  .card{
-      padding-top: 20px;
-  }
-  .row {
-      margin-bottom: 2rem;
-  }
-  #myCarousel {
-    width: 80%;
-  }
-
-  .navbar-nav {
-    align-items: center;
-  }
-  .navbar-dark .navbar-nav .nav-link {
-    margin-bottom: 0.4rem;
-    width: 70%;
-    text-align: center;
-  }
-
-  .nav-item {
-    width: 100%;
-  }
-}
-
-@media(max-width:991px)
-{
-  .navbar-nav {
-    align-items: center;
-  }
-  .navbar-dark .navbar-nav .nav-link {
-    margin-bottom: 0.4rem;
-    width: 70%;
-    text-align: center;
-  }
-
-  .nav-item {
-    width: 100%;
-  }
-}
-
-
 
 
