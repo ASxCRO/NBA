@@ -15,7 +15,8 @@ jQuery(document).ready(function() {
     
   
 });
-
+var inputCompareFirst = undefined;
+var inputCompareSecond = undefined;
 if(window.location.pathname == ( '/clubs.html') || ('/players.html') || ('/compare-players.html'))
 {
   var NBAfranchise = [];
@@ -123,8 +124,7 @@ if (window.location.pathname == '/clubs.html') {
     games = gamesAll['league']['standard'];
   }
 }
-var inputCompareFirst = undefined;
-var inputCompareSecond = undefined;
+
 var element = undefined;
 window.addEventListener("load", function(){
   $('.team a').click(function () {
