@@ -61,7 +61,10 @@
       <input type="text" class="form-control" id="secondPlayerForComparison" aria-describedby="secondPlayerComparison" placeholder="Pick your second player for comparison" readonly required>
       <small id="secondPlayerComparison" class="form-text text-muted">Pick it with click on icon <i class="fas fa-bookmark"></i>. </small>
     </div>
-    <button type="button" class="btn btn-primary hvr-shutter-in-vertical" data-toggle="modal" data-target="#comparePlayersModal" id="btnCompare" onclick="ComparePlayers()">Compare</button>
+    <div class="form-group">
+      <button type="button" class="btn btn-primary hvr-shutter-in-vertical" data-toggle="modal" data-target="#comparePlayersModal" id="btnCompare" onclick="ComparePlayers()">Compare</button>
+      <button type="button" class="btn btn-primary hvr-shutter-in-vertical" id="btnClear" onclick="clearPlayers()">Clear players</button>
+    </div>
   </form>
   <hr class="divide"/>
   <div class="loader-container">

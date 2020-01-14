@@ -558,6 +558,8 @@ label {
   border-color: #8c8b8b;
   background: #0f0f0f;
   color:#fff;
+  width: 49%; 
+  
 }
 
 .hvr-shutter-in-vertical:before {
@@ -569,10 +571,6 @@ label {
   width: 90%;
   align-items: flex-end;
   justify-content: space-between;
-}
-
-.flex-container-compare img {
-  
 }
 
 .hvr-bounce-to-top:before {
