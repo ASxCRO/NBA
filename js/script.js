@@ -64,9 +64,9 @@ if(window.location.pathname == ( '/clubs.html') || ('/players.html') || ('/compa
       });
     }
     else if ((window.location.pathname == '/players.html') || (window.location.pathname == '/compare-players.html')) {
-      setTimeout(() => {
+      $(document).ready(function() {
         FiltrirajIgraceKluba(2);
-      }, 200);
+      });
     }
   });
 }
