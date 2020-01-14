@@ -63,8 +63,10 @@ if(window.location.pathname == ( '/clubs.html') || ('/players.html') || ('/compa
         jQuery('.p-clubs-list').append(teamDiv);
       });
     }
-    else if (window.location.pathname == '/players.html' || window.location.pathname == '/compare-players.html') {
-          FiltrirajIgraceKluba(2);
+    else if ((window.location.pathname == '/players.html') || (window.location.pathname == '/compare-players.html')) {
+      setTimeout(() => {
+        FiltrirajIgraceKluba(2);
+      }, 200);
     }
   });
 }
