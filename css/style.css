@@ -224,7 +224,7 @@ body {
   height: 400px;
 }
 
-.clubs-footer a{
+.page-footer a,.clubs-footer a{
   text-decoration: none;
   font-size: 2rem;
   font-weight: 500;
