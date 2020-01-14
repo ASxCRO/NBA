@@ -11,12 +11,16 @@ jQuery(document).ready(function() {
     alert('There is not existent data for your query, please select different year.')
   }, true);
   
-   
+
     
   
 });
-var inputCompareFirst = undefined;
-var inputCompareSecond = undefined;
+
+var inputCompareFirst = $('#firstPlayerForComparison');
+var inputCompareSecond = $('#secondPlayerForComparison');
+inputCompareFirst.val('');
+inputCompareSecond.val('');
+
 if(window.location.pathname == ( '/clubs.html') || ('/players.html') || ('/compare-players.html'))
 {
   var NBAfranchise = [];
@@ -66,12 +70,13 @@ if(window.location.pathname == ( '/clubs.html') || ('/players.html') || ('/compa
     }
     else if ((window.location.pathname == '/players.html') || (window.location.pathname == '/compare-players.html')) {
       $(document).ready(function() {
-        FiltrirajIgraceKluba(2);
         if(window.location.pathname == '/compare-players.html')
         {
           checkBtnCompareDisable();
           checkBtnRemoveDisable();
         }
+        FiltrirajIgraceKluba(2);
+
       });
     }
   });
@@ -169,7 +174,7 @@ window.addEventListener("load", function(){
         FiltrirajUtakmice();
         FiltrirajIgraceKluba(1);
       }
-    }, 200);
+    }, 300);
 
     profilKlubaModal.modal();
 
@@ -196,8 +201,10 @@ window.addEventListener("load", function(){
         });
       }
     });
-    FiltrirajProfilIgraca(playerId);
-    FiltrirajSezonuIgraca();
+    setTimeout(() => {
+      FiltrirajProfilIgraca(playerId);
+      FiltrirajSezonuIgraca();
+    }, 300);
   });
   $(document).delegate('.edit', 'click', function()
   {
@@ -220,8 +227,7 @@ window.addEventListener("load", function(){
     }
 
   });
-  inputCompareFirst = $('#firstPlayerForComparison');
-  inputCompareSecond = $('#secondPlayerForComparison');
+
   $(document).delegate('#buttonCompareFirst', 'click', function()
   {
     playerId = $(this).attr('personid');
@@ -231,17 +237,15 @@ window.addEventListener("load", function(){
       bootbox.alert("You already selected that player for comparison.<br>Please select different player.");
     }
     else {
-      inputCompareFirst.val(playerForComparison.firstName + ' ' + playerForComparison.lastName)
+      inputCompareFirst.val(playerForComparison.firstName + ' ' + playerForComparison.lastName);
       inputCompareFirst.attr('personid',playerId);
       inputCompareFirst.attr('teamid',playerForComparison.teamId);
     }
     checkBtnCompareDisable();
     checkBtnRemoveDisable();
-
   });
   $(document).delegate('#buttonCompareSecond', 'click', function()
   {
-    
     playerId = $(this).attr('personid');
     getPlayerCompare(playerId);
     if(inputCompareSecond.val() == (playerForComparison.firstName + ' ' + playerForComparison.lastName)|| inputCompareFirst.val()  == (playerForComparison.firstName + ' ' + playerForComparison.lastName))
@@ -594,7 +598,6 @@ function ComparePlayers()
       {
         $('#clubLogoRight').attr('src','https://www.nba.com/assets/logos/teams/primary/web/'+club.tricode+'.svg');
         $('#clubLogoRight').attr('title',club.fullName);
-  
       }
     });
   
