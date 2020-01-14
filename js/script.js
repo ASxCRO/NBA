@@ -519,14 +519,6 @@ function getPlayerCompare(playerIdcompare)
   });
 }
 
-// var traceFirstPlayerCompareGeneral = undefined; 
-// var traceSecondPlayerComparGeneral = undefined; 
-// var traceFirstPlayerComparePerGame = undefined; 
-// var traceSecondPlayerComparPerGame = undefined; 
-// var dataGeneral = undefined;
-// var dataPerGame = undefined;
-// var layoutGeneral = undefined;
-// var layOutPerGame = undefined;
 var i = 0;
 function ComparePlayers()
 {
