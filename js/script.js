@@ -398,9 +398,13 @@ function FiltrirajIgraceKluba(broj)
 }
 
 var PlayerCarrer = 0;
+var firstPlayerCarrer = 0;
+var secondPlayerCarrer = 0;
 var tablePlayerScore  = 0;
 var trazenaGodina = '';
 var allPlayerInfo = '';
+var allFirstPlayerInfo = '';
+var allSecondPlayerInfo = '';
 function FiltrirajProfilIgraca(playerIdpar)
 {
   if ($("#dpdnGodina").children().length > 0) {
@@ -513,15 +517,15 @@ function getPlayerCompare(playerIdcompare)
   });
 }
 
-var traceFirstPlayerCompareGeneral = undefined; 
-var traceSecondPlayerComparGeneral = undefined; 
-var traceFirstPlayerComparePerGame = undefined; 
-var traceSecondPlayerComparPerGame = undefined; 
-var dataGeneral = undefined;
-var dataPerGame = undefined;
-var layoutGeneral = undefined;
-var layOutPerGame = undefined;
-
+// var traceFirstPlayerCompareGeneral = undefined; 
+// var traceSecondPlayerComparGeneral = undefined; 
+// var traceFirstPlayerComparePerGame = undefined; 
+// var traceSecondPlayerComparPerGame = undefined; 
+// var dataGeneral = undefined;
+// var dataPerGame = undefined;
+// var layoutGeneral = undefined;
+// var layOutPerGame = undefined;
+var i = 0;
 function ComparePlayers()
 {
 
@@ -553,31 +557,8 @@ function ComparePlayers()
   requestPlayers.send();
   
   requestPlayers.onload = function() {
-    allPlayerInfo = requestPlayers.response;
-    PlayerCarrer = allPlayerInfo['league']['standard']['stats']['careerSummary'];
-
-
-    traceFirstPlayerComparePerGame = {
-      x: ['PPG', 'RPG', 'BPG', 'MPG'],
-      y: [PlayerCarrer.ppg, PlayerCarrer.rpg, PlayerCarrer.bpg, PlayerCarrer.mpg],
-      type: 'bar',
-      name: inputCompareFirst.val(),
-      marker: {
-        color: 'rgb(49,130,189)',
-        opacity: 0.7,
-      }
-    };
-    traceFirstPlayerCompareGeneral = {
-      x: ['ASSISTS', 'BLOCKS', 'STEALS', 'TURNOVERS', 'GAMES PLAYED'],
-      y: [PlayerCarrer.assists,PlayerCarrer.blocks,PlayerCarrer.steals,PlayerCarrer.turnovers,PlayerCarrer.gamesPlayed],
-      type: 'bar',
-      name: inputCompareFirst.val(),
-      marker: {
-        color: 'rgb(49,130,189)',
-        opacity: 0.7,
-      }
-    };
-
+    allFirstPlayerInfo = requestPlayers.response;
+    firstPlayerCarrer = allFirstPlayerInfo['league']['standard']['stats']['careerSummary'];
   }
 
 
@@ -589,55 +570,71 @@ function ComparePlayers()
   requestPlayersSecond.send();
   
   requestPlayersSecond.onload = function() {
-    allPlayerInfo = requestPlayersSecond.response;
-    PlayerCarrer = allPlayerInfo['league']['standard']['stats']['careerSummary'];
-
-    traceSecondPlayerComparePerGame= {
-      x: ['PPG', 'RPG', 'BPG', 'MPG'],
-      y: [PlayerCarrer.ppg, PlayerCarrer.rpg, PlayerCarrer.bpg, PlayerCarrer.mpg],
-      type: 'bar',
-      name: inputCompareSecond.val(),
-      marker: {
-        color: 'rgb(204,204,204)',
-        opacity: 0.5
-      }
-    };
-    traceSecondPlayerCompareGeneral = {
-      x: ['ASSISTS', 'BLOCKS', 'STEALS', 'TURNOVERS', 'GAMES PLAYED'],
-      y: [PlayerCarrer.assists,PlayerCarrer.blocks,PlayerCarrer.steals,PlayerCarrer.turnovers,PlayerCarrer.gamesPlayed],
-      type: 'bar',
-      name: inputCompareSecond.val(),
-      marker: {
-        color: 'rgb(204,204,204)',
-        opacity: 0.5
-      }
-    };
-    dataGeneral = [traceFirstPlayerCompareGeneral, traceSecondPlayerCompareGeneral];
-    dataPerGame = [traceFirstPlayerComparePerGame, traceSecondPlayerComparePerGame];
-    layoutGeneral = {
-      title: 'Players Comparison General (Carrer)',
-      xaxis: {
-        tickangle: -45
-      },
-      barmode: 'group'
-    };
-    layOutPerGame = {
-      title: 'Players Comparison Per Game (Carrer)',
-      xaxis: {
-        tickangle: -45
-      },
-      barmode: 'group'
-    };
-   Plotly.newPlot('comparePlayersModalBodyGeneral', dataGeneral, layoutGeneral,{ responsive: true });
-   Plotly.newPlot('comparePlayersModalBodyPerGame', dataPerGame, layOutPerGame, { responsive: true });
     
-
-  }
-
-
+    allSecondPlayerInfo = requestPlayersSecond.response;
+    secondPlayerCarrer = allSecondPlayerInfo['league']['standard']['stats']['careerSummary'];
+    setTimeout(() => {
+      let traceFirstPlayerComparePerGame = {
+        x: ['PPG', 'RPG', 'BPG', 'MPG'],
+        y: [firstPlayerCarrer.ppg, firstPlayerCarrer.rpg, firstPlayerCarrer.bpg, firstPlayerCarrer.mpg],
+        type: 'bar',
+        name: inputCompareFirst.val(),
+        marker: {
+          color: 'rgb(49,130,189)',
+          opacity: 0.7,
+        }
+      };
+      let traceFirstPlayerCompareGeneral = {
+        x: ['ASSISTS', 'BLOCKS', 'STEALS', 'TURNOVERS', 'GAMES PLAYED'],
+        y: [firstPlayerCarrer.firstPlayerCarrer,firstPlayerCarrer.blocks,firstPlayerCarrer.steals,firstPlayerCarrer.turnovers,firstPlayerCarrer.gamesPlayed],
+        type: 'bar',
+        name: inputCompareFirst.val(),
+        marker: {
+          color: 'rgb(49,130,189)',
+          opacity: 0.7,
+        }
+      };
+      let traceSecondPlayerComparePerGame= {
+        x: ['PPG', 'RPG', 'BPG', 'MPG'],
+        y: [secondPlayerCarrer.ppg, secondPlayerCarrer.rpg, secondPlayerCarrer.bpg, secondPlayerCarrer.mpg],
+        type: 'bar',
+        name: inputCompareSecond.val(),
+        marker: {
+          color: 'rgb(204,204,204)',
+          opacity: 0.5
+        }
+      };
+      let traceSecondPlayerCompareGeneral = {
+        x: ['ASSISTS', 'BLOCKS', 'STEALS', 'TURNOVERS', 'GAMES PLAYED'],
+        y: [secondPlayerCarrer.assists,secondPlayerCarrer.blocks,secondPlayerCarrer.steals,secondPlayerCarrer.turnovers,secondPlayerCarrer.gamesPlayed],
+        type: 'bar',
+        name: inputCompareSecond.val(),
+        marker: {
+          color: 'rgb(204,204,204)',
+          opacity: 0.5
+        }
+      };
+      let dataGeneral = [traceFirstPlayerCompareGeneral, traceSecondPlayerCompareGeneral];
+      let dataPerGame = [traceFirstPlayerComparePerGame, traceSecondPlayerComparePerGame];
+      let layoutGeneral = {
+        title: 'Players Comparison General (Carrer)',
+        xaxis: {
+          tickangle: -45
+        },
+        barmode: 'group'
+      };
+      let layOutPerGame = {
+        title: 'Players Comparison Per Game (Carrer)',
+        xaxis: {
+          tickangle: -45
+        },
+        barmode: 'group'
+      };
   
- 
+        Plotly.newPlot('comparePlayersModalBodyGeneral', dataGeneral, layoutGeneral,{ responsive: true });
+        Plotly.newPlot('comparePlayersModalBodyPerGame', dataPerGame, layOutPerGame, { responsive: true });
 
- 
 
+    }, 200);
+  }
 }
