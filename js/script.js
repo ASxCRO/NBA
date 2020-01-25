@@ -1,20 +1,19 @@
 jQuery(document).ready(function() {
+  ///////////////////////////////////////////////// Loader
 	jQuery(".loader").delay(1000).fadeOut("slow");
   jQuery("#overlayer").delay(1000).fadeOut("slow");
+  ///////////////////////////////////////////////// Nav-link hover
   $( ".nav-link" ).hover(
     function() {
       $( this ).css('background-color','#000')
     }
   );
+  ///////////////////////////////////////////////// Error Handing
   window.addEventListener('error', function(e) {
-    console.log(e);
-    alert('There is not existent data for your query, please select different year.')
+    alert('There doesnt existent data for current query, please try again or reload page. ERROR: ' + e.message)
   }, true);
-  
-
-    
-  
 });
+
 
 var inputCompareFirst = $('#firstPlayerForComparison');
 var inputCompareSecond = $('#secondPlayerForComparison');
@@ -22,9 +21,9 @@ inputCompareFirst.val('');
 inputCompareSecond.val('');
 
 if(window.location.pathname == ( '/clubs.html') || ('/players.html') || ('/compare-players.html'))
-{
+{   
+  ///////////////////////////////////////////////// Get TEAMS -> MAKE TEAM DIV'S -> Every page needs this
   var NBAfranchise = [];
-  var broj = 1;
   $.getJSON('https://api.allorigins.win/get?url=https%3A//data.nba.net/data/10s/prod/v1/2019/teams.json&callback=?', function (json) {
     const allClubs = JSON.parse(json.contents);
     const nbaClubs = allClubs.league.standard;
@@ -68,8 +67,9 @@ if(window.location.pathname == ( '/clubs.html') || ('/players.html') || ('/compa
         jQuery('.p-clubs-list').append(teamDiv);
       });
     }
-    else if ((window.location.pathname == '/players.html') || (window.location.pathname == '/compare-players.html')) {
+    else if ((window.location.pathname == '/players.html') || (window.location.pathname == '/compare-players.html')) { 
       $(document).ready(function() {
+          ///////////////////////////////////////////////// Get ALL PLAYERS FiltrirajIgraceKluba(2) -> 2 == ALL
         if(window.location.pathname == '/compare-players.html')
         {
           checkBtnCompareDisable();
@@ -82,8 +82,8 @@ if(window.location.pathname == ( '/clubs.html') || ('/players.html') || ('/compa
   });
 }
 
+///////////////////////////////////////////////// Filter NBA club from ALL CLUBS
 function listOnlyNBAfranchise(jsonObj) {
-
   for (let i = 0; i < jsonObj.length; i++) {
     if(jsonObj[i]['isNBAFranchise'] == true){
       NBAfranchise.push(jsonObj[i]);
@@ -92,6 +92,7 @@ function listOnlyNBAfranchise(jsonObj) {
 }
 
 var playerId = 0;
+///////////////////////////////////////////////// Get CLUBS CONFERENCE STANDINGS
 if (window.location.pathname == '/clubs.html') {
   var team = 0;
   var teamStandingsEast = [];
@@ -115,12 +116,10 @@ if (window.location.pathname == '/clubs.html') {
   var games = [];
 
 
-
+///////////////////////////////////////////////// Get CLUBS GAMES
   let requestURLgames = 'https://ancient-lake-18259.herokuapp.com/https://data.nba.net/data/10s/prod/v1/2019/schedule.json';
   var requestGames = new XMLHttpRequest();
   requestGames.open('GET', requestURLgames);
-  requestGames.setRequestHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
-  requestGames.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   requestGames.responseType = 'json';
   requestGames.send();
 
@@ -132,32 +131,34 @@ if (window.location.pathname == '/clubs.html') {
 
 var element = undefined;
 window.addEventListener("load", function(){
-  $('.team a').click(function () {
-    teamStandingsAll.forEach(element => {
-      if($(this).attr('id') == element.teamSitesOnly.teamTricode)
-      {
-        team = element;
-        $('#overall-score tbody').empty();
-        $('#overall-score').css("margin-bottom","2rem");
-        $('h4#profilKlubaLabel').text(team.teamSitesOnly.teamKey+' '+team.teamSitesOnly.teamNickname);
+///////////////////////////////////////////////// Trigerring club text click
+$('.team a').click(function () {
+  teamStandingsAll.forEach(element => {
+    if($(this).attr('id') == element.teamSitesOnly.teamTricode)
+    {
+      team = element;
+      $('#overall-score tbody').empty();
+      $('#overall-score').css("margin-bottom","2rem");
+      $('h4#profilKlubaLabel').text(team.teamSitesOnly.teamKey+' '+team.teamSitesOnly.teamNickname);
 
-        var sRedak='<tr>';
-        sRedak += '<td>'+ team.confRank +'</td>';
-        sRedak += '<td>'+ team.win +'</td>';
-        sRedak += '<td>'+ team.loss +'</td>';
-        sRedak += '<td>'+ team.winPctV2 +'</td>';
-        sRedak += '<td>'+ team.lossPctV2 +'</td>';
-        sRedak += '<td>'+ team.homeWin +'</td>';
-        sRedak += '<td>'+ team.homeLoss +'</td>';
-        sRedak += '<td>'+ team.awayWin +'</td>';
-        sRedak += '<td>'+ team.awayLoss +'</td>';
-        sRedak += '</tr>';
-      
-        $('#overall-score tbody').append(sRedak);
-      }
-    });
+      var sRedak='<tr>';
+      sRedak += '<td>'+ team.confRank +'</td>';
+      sRedak += '<td>'+ team.win +'</td>';
+      sRedak += '<td>'+ team.loss +'</td>';
+      sRedak += '<td>'+ team.winPctV2 +'</td>';
+      sRedak += '<td>'+ team.lossPctV2 +'</td>';
+      sRedak += '<td>'+ team.homeWin +'</td>';
+      sRedak += '<td>'+ team.homeLoss +'</td>';
+      sRedak += '<td>'+ team.awayWin +'</td>';
+      sRedak += '<td>'+ team.awayLoss +'</td>';
+      sRedak += '</tr>';
+    
+      $('#overall-score tbody').append(sRedak);
+    }
+  });
     var profilKlubaModal = $('#profilKlubaModal');
 
+    ///////////////////////////////////////////////// Set demanded CLUB LOGO
     $('#clubLogo').attr('src','https://www.nba.com/assets/logos/teams/primary/web/'+team.teamSitesOnly.teamTricode+'.svg');
     $('#clubLogo').attr('title', team.teamSitesOnly.teamKey+' '+team.teamSitesOnly.teamNickname);
     if ( $.fn.dataTable.isDataTable( '#games-score' )  ) {  
@@ -182,6 +183,7 @@ window.addEventListener("load", function(){
 
   });
   
+  ///////////////////////////////////////////////// Triggering show demanded player profile modal
   $(document).delegate('#prikaziProfilIgracaBtn', 'click', function()
   {
     playerId = $(this).attr('personid');
@@ -267,6 +269,8 @@ var playerForComparison = undefined;
 
 var table = undefined;
 var trazenaGodinaClub = 0;
+
+  ///////////////////////////////////////////////// Filtriraj utakmice -> Club Modal
 function FiltrirajUtakmice()
 {
   if ( $.fn.dataTable.isDataTable( '#games-score' )  ) {  
@@ -319,6 +323,7 @@ function FiltrirajUtakmice()
 var players = [];
 var tablePlayersScore = undefined;
 var tablePlayers = undefined;
+  ///////////////////////////////////////////////// Filtriraj igrace Kluba -> Club Modal OR Players.html based on broj input
 function FiltrirajIgraceKluba(broj)
 {
  
@@ -359,6 +364,7 @@ function FiltrirajIgraceKluba(broj)
     players = playersAll['league']['standard'];
     switch(broj) {
       case 1:
+          ///////////////////////////////////////////////// Filtriraj igrace Kluba -> Club Modal
         players.forEach(player => {
     
           if(player.teamId == team.teamId )
@@ -369,6 +375,7 @@ function FiltrirajIgraceKluba(broj)
         tablePlayers.draw();
         tablePlayers.columns.adjust();
       case 2:
+          ///////////////////////////////////////////////// Filtriraj igrace Kluba -> Players.html / ComparePlayers.html
         var position = '';
         players.forEach(player => {
           if(player.teamSitesOnly == undefined)
@@ -459,6 +466,7 @@ var AllPlayerSeasons = 0;
 var tablePlayerSeasonalScore = 0;
 var demandedPlayerSeasonTotal = 0;
 
+          ///////////////////////////////////////////////// Filtriraj Sezonu of demanded player based of YEAR DROPDOWN
 function FiltrirajSezonuIgraca() {
   if ( $.fn.dataTable.isDataTable( '#player-score-season' )  ) {  
     tablePlayerSeasonalScore = $('#player-score-season').DataTable();
@@ -523,6 +531,7 @@ function FiltrirajSezonuIgraca() {
   }
 }
 
+///////////////////////////////////////////////// Check if playerForComparison is already in queue
 function getPlayerCompare(playerIdcompare)
 {
   players.forEach(player => {
@@ -565,7 +574,7 @@ function checkBtnRemoveDisable()
   }
 }
 
-
+  ///////////////////////////////////////////////// clear value for player input boxes
 function clearPlayers()
 {
   if((inputCompareFirst.val().length > 0) || (inputCompareSecond.val().length > 0))
@@ -579,6 +588,7 @@ function clearPlayers()
 
 
 var i = 0;
+///////////////////////////////////////////////// compare players -> show modal -> fill plot.ly
 function ComparePlayers()
 {
   if((inputCompareFirst.val() == '') ||(inputCompareSecond.val() == ''))
@@ -644,7 +654,7 @@ function ComparePlayers()
         };
         let traceFirstPlayerCompareGeneral = {
           x: ['ASSISTS', 'BLOCKS', 'STEALS', 'TURNOVERS', 'GAMES PLAYED'],
-          y: [firstPlayerCarrer.firstPlayerCarrer,firstPlayerCarrer.blocks,firstPlayerCarrer.steals,firstPlayerCarrer.turnovers,firstPlayerCarrer.gamesPlayed],
+          y: [firstPlayerCarrer.assists,firstPlayerCarrer.blocks,firstPlayerCarrer.steals,firstPlayerCarrer.turnovers,firstPlayerCarrer.gamesPlayed],
           type: 'bar',
           name: inputCompareFirst.val(),
           marker: {
@@ -691,8 +701,6 @@ function ComparePlayers()
     
           Plotly.newPlot('comparePlayersModalBodyGeneral', dataGeneral, layoutGeneral,{ responsive: true });
           Plotly.newPlot('comparePlayersModalBodyPerGame', dataPerGame, layOutPerGame, { responsive: true });
-  
-  
       }, 200);
     }
   }

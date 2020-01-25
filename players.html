@@ -1,164 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>NBA | Players</title>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
-    <script src="./js/script.js"></script>
-    <link rel="stylesheet" href="css/all.css">
-    <script src="./js/all.js"></script>
-    <link rel="stylesheet" href="webfonts/solid.css">
-    <link href="css/hover.css" rel="stylesheet" media="all">
-    <link rel="stylesheet" href="css/style.css">
-</head>
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>NBA | Players</title>
+      <link rel="stylesheet" 
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+            crossorigin="anonymous">
+      <link rel="stylesheet" href="css/all.css">
+      <link href="css/hover.css" rel="stylesheet" media="all">
+      <link href="css/style.css" rel="stylesheet" >
+  </head>
 
-<body id="page-top" class="clubs">
+  <body id="page-top" class="clubs">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="index.html"><img src="./img/nbalogo.png" id="logo"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger nav-item-style hvr-shutter-in-horizontal" href="clubs.html">Clubs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger nav-item-style hvr-shutter-in-horizontal" href="players.html">Players</a>
-                    </li>
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+          <div class="container">
+              <a class="navbar-brand js-scroll-trigger" href="index.html"><img src="./img/nbalogo.png" id="logo"></a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarResponsive">
+                  <ul class="navbar-nav ml-auto">
+                      <li class="nav-item">
+                          <a class="nav-link js-scroll-trigger nav-item-style hvr-shutter-in-horizontal" href="clubs.html">Clubs</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link js-scroll-trigger nav-item-style hvr-shutter-in-horizontal" href="players.html">Players</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link js-scroll-trigger nav-item-style hvr-shutter-in-horizontal" href="compare-players.html">Compare Players</a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </nav>
 
+    <div class="container">
+      <div class="loader-container">
 
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger nav-item-style hvr-shutter-in-horizontal" href="compare-players.html">Compare Players</a>
-                    </li>
-                </ul>
+        <!-- Loader -->
+        <div id="overlayer"></div>
+        <div class="loader">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
             </div>
         </div>
-    </nav>
 
-<div class="container">
-  <div class="loader-container">
-
-    <div id="overlayer"></div>
-    <div class="loader">
-        <div class="spinner-border text-primary" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-
-    <section class="p-player-list">
-      <table id="player-score" class="table table-hover table-bordered nowrap" style="width:100%">
-        <thead class="thead-dark">
-          <tr>
-            <th></th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Team</th>
-            <th>Position</th>
-            <th>Years Pro</th>
-            <th>Country</th>
-          </tr>
-        </thead>
-           
-          <tbody>
-          </tbody>
-       
-
-      </table>
-    </section>
-  </div>
-</div>
-
-    <!-- Modal -->
-	<div class="modal fade" id="profilIgracaModal" tabindex="-1" role="dialog" aria-labelledby="profilIgracaModal">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-          <div class="flex-container">
-            <h4 class="modal-title" id="profilIgracaLabel"></h4>
-            <img id="clubLogo" alt="club_logo">
-            <img id="playerImage" alt="player_image">
-          </div>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	      </div>
-	      <div class="modal-body">
-          <h1>Carrer summary</h1>
-          <table id="player-score-carrer" class="table table-hover table-bordered nowrap" style="width:100%">
+        <!-- All Players Table -->
+        <section class="p-player-list">
+          <table id="player-score" class="table table-hover table-bordered nowrap" style="width:100%">
             <thead class="thead-dark">
               <tr>
-                <th><abbr title="Points Per Game">PPG</abbr></th>
-                <th><abbr title="Rebounds Per Game">RPG</abbr></th>
-                <th><abbr title="Blocks Per Game">BPG</abbr></th>
-                <th><abbr title="Minutes Per Game">MPG</abbr></th>
-                <th>Assists</th>
-                <th>Blocks</th>
-                <th>Steals</th>
-                <th>Turnovers</th>
-                <th>Games Played</th>
+                <th></th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Team</th>
+                <th>Position</th>
+                <th>Years Pro</th>
+                <th>Country</th>
               </tr>
             </thead>
-            <tbody>
-            </tbody>
+              
+              <tbody>
+              </tbody>
           </table>
-          <h1>Seasonal Player Stats</h1>
-          <div id="filter-container">
-            <table id="filter-tablica" class="table table-dark">
-              <thead>
+        </section>
+      </div>
+    </div>
+
+      <!-- Modal Profil Igraca-->
+    <div class="modal fade" id="profilIgracaModal" tabindex="-1" role="dialog" aria-labelledby="profilIgracaModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="flex-container">
+              <h4 class="modal-title" id="profilIgracaLabel"></h4>
+              <img id="clubLogo" alt="club_logo">
+              <img id="playerImage" alt="player_image">
+            </div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+
+            <!-- Carrer summary -->
+            <h1>Carrer summary</h1>
+            <table id="player-score-carrer" class="table table-hover table-bordered nowrap" style="width:100%">
+              <thead class="thead-dark">
                 <tr>
-                  <th class="text-center">Year</th>
+                  <th><abbr title="Points Per Game">PPG</abbr></th>
+                  <th><abbr title="Rebounds Per Game">RPG</abbr></th>
+                  <th><abbr title="Blocks Per Game">BPG</abbr></th>
+                  <th><abbr title="Minutes Per Game">MPG</abbr></th>
+                  <th>Assists</th>
+                  <th>Blocks</th>
+                  <th>Steals</th>
+                  <th>Turnovers</th>
+                  <th>Games Played</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="text-center">
-                    <select class="form-control" id="dpdnGodina">
-                    </select>
-                  </td>
-                </tr>
               </tbody>
             </table>
-          </div>
-              <table id="player-score-season" class="table table-hover table-bordered nowrap" style="width:100%">
-                <thead class="thead-dark">
+
+            <!-- Seasonal Players Stats -->
+            <h1>Seasonal Player Stats</h1>
+            <div id="filter-container">
+              <table id="filter-tablica" class="table table-dark">
+                <thead>
                   <tr>
-                    <th><abbr title="Points Per Game">PPG</abbr></th>
-                    <th><abbr title="Rebounds Per Game">RPG</abbr></th>
-                    <th><abbr title="Blocks Per Game">BPG</abbr></th>
-                    <th><abbr title="Minutes Per Game">MPG</abbr></th>
-                    <th>Assists</th>
-                    <th>Blocks</th>
-                    <th>Steals</th>
-                    <th>Turnovers</th>
-                    <th>Games Played</th>
+                    <th class="text-center">Year</th>
                   </tr>
                 </thead>
                 <tbody>
+                  <tr>
+                    <td class="text-center">
+                      <select class="form-control" id="dpdnGodina">
+                      </select>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
-         
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
-  </div>
-  <script>
+            </div>
+            <table id="player-score-season" class="table table-hover table-bordered nowrap" style="width:100%">
+              <thead class="thead-dark">
+                <tr>
+                  <th><abbr title="Points Per Game">PPG</abbr></th>
+                  <th><abbr title="Rebounds Per Game">RPG</abbr></th>
+                  <th><abbr title="Blocks Per Game">BPG</abbr></th>
+                  <th><abbr title="Minutes Per Game">MPG</abbr></th>
+                  <th>Assists</th>
+                  <th>Blocks</th>
+                  <th>Steals</th>
+                  <th>Turnovers</th>
+                  <th>Games Played</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  </script>
-  
-</body>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" 
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" 
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" 
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" 
+            charset="utf8" 
+            src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" 
+            charset="utf8"  
+            src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" 
+            charset="utf8" 
+            src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" 
+            charset="utf8" 
+            src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+    <script src="./js/all.js"></script>
+    <script src="./js/script.js"></script>
+    
+  </body>
 </html>
 
 

@@ -5,101 +5,95 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>NBA | Players</title>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="./js/bootbox.all.min.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" 
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+          crossorigin="anonymous">
     <link rel="stylesheet" href="css/all.css">
-    <script src="./js/all.js"></script>
-    <link rel="stylesheet" href="webfonts/solid.css">
     <link href="css/hover.css" rel="stylesheet" media="all">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body id="page-top" class="clubs">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+      <div class="container">
+          <a class="navbar-brand js-scroll-trigger" href="index.html"><img src="./img/nbalogo.png" id="logo"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                      <a class="nav-link js-scroll-trigger nav-item-style hvr-shutter-in-horizontal" href="clubs.html">Clubs</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link js-scroll-trigger nav-item-style hvr-shutter-in-horizontal" href="players.html">Players</a>
+                  </li>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="index.html"><img src="./img/nbalogo.png" id="logo"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger nav-item-style hvr-shutter-in-horizontal" href="clubs.html">Clubs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger nav-item-style hvr-shutter-in-horizontal" href="players.html">Players</a>
-                    </li>
 
+                  <li class="nav-item">
+                      <a class="nav-link js-scroll-trigger nav-item-style hvr-shutter-in-horizontal" href="compare-players.html">Compare Players</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
 
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger nav-item-style hvr-shutter-in-horizontal" href="compare-players.html">Compare Players</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+  <div class="container">
+    <!-- Form for players Pick&Compare -->
+    <form id="comparePlayersForm">
+      <div class="form-group">
+        <label for="firstPlayerForComparison">First player: </label>
+        <input type="text" class="form-control" id="firstPlayerForComparison" aria-describedby="firstPlayerComparison" placeholder="Pick your first player for comparison" readonly required>
+        <small id="firstPlayerComparison" class="form-text text-muted">Pick it with click on icon <i class="far fa-bookmark"></i>. </small>
+      </div>
+      <div class="form-group">
+        <label for="secondPlayerForComparison">Second player: </label>
+        <input type="text" class="form-control" id="secondPlayerForComparison" aria-describedby="secondPlayerComparison" placeholder="Pick your second player for comparison" readonly required>
+        <small id="secondPlayerComparison" class="form-text text-muted">Pick it with click on icon <i class="fas fa-bookmark"></i>. </small>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-primary hvr-shutter-in-vertical" data-toggle="modal" data-target="#comparePlayersModal" id="btnCompare" onclick="ComparePlayers()">Compare</button>
+        <button type="button" class="btn btn-primary hvr-shutter-in-vertical" id="btnClear" onclick="clearPlayers()">Clear players</button>
+      </div>
+    </form>
 
-<div class="container">
-  <form id="comparePlayersForm">
-    <div class="form-group">
-      <label for="firstPlayerForComparison">First player: </label>
-      <input type="text" class="form-control" id="firstPlayerForComparison" aria-describedby="firstPlayerComparison" placeholder="Pick your first player for comparison" readonly required>
-      <small id="firstPlayerComparison" class="form-text text-muted">Pick it with click on icon <i class="far fa-bookmark"></i>. </small>
-    </div>
-    <div class="form-group">
-      <label for="secondPlayerForComparison">Second player: </label>
-      <input type="text" class="form-control" id="secondPlayerForComparison" aria-describedby="secondPlayerComparison" placeholder="Pick your second player for comparison" readonly required>
-      <small id="secondPlayerComparison" class="form-text text-muted">Pick it with click on icon <i class="fas fa-bookmark"></i>. </small>
-    </div>
-    <div class="form-group">
-      <button type="button" class="btn btn-primary hvr-shutter-in-vertical" data-toggle="modal" data-target="#comparePlayersModal" id="btnCompare" onclick="ComparePlayers()">Compare</button>
-      <button type="button" class="btn btn-primary hvr-shutter-in-vertical" id="btnClear" onclick="clearPlayers()">Clear players</button>
-    </div>
-  </form>
-  <hr class="divide"/>
-  <div class="loader-container">
+    <!-- Divide form and table-->
+    <hr class="divide"/>
+    <div class="loader-container">
 
-    <div id="overlayer"></div>
-    <div class="loader">
-        <div class="spinner-border text-primary" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-    
-    <section class="p-player-list">
-      <table id="player-score" class="table table-hover table-bordered nowrap" style="width:100%">
-        <thead class="thead-dark">
-          <tr>
-            <th></th>
-            <th></th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Team</th>
-            <th>Position</th>
-            <th>Years Pro</th>
-            <th>Country</th>
-          </tr>
-        </thead>
-           
+      <!-- Loader-->
+      <div id="overlayer"></div>
+      <div class="loader">
+          <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+          </div>
+      </div>
+      
+      <!-- Players pick table -->
+      <section class="p-player-list">
+        <table id="player-score" class="table table-hover table-bordered nowrap" style="width:100%">
+          <thead class="thead-dark">
+            <tr>
+              <th></th>
+              <th></th>
+              <th>Firstname</th>
+              <th>Lastname</th>
+              <th>Team</th>
+              <th>Position</th>
+              <th>Years Pro</th>
+              <th>Country</th>
+            </tr>
+          </thead>
           <tbody>
           </tbody>
-       
-
-      </table>
-    </section>
+        </table>
+      </section>
+    </div>
   </div>
-</div>
 
-    <!-- Modal -->
+    <!-- Modal Compared Players-->
 	<div class="modal fade" id="comparePlayersModal" tabindex="-1" role="dialog" aria-labelledby="comparePlayersModal">
 	  <div class="modal-dialog" role="document" id="comparePlayersModalDialog">
 	    <div class="modal-content">
@@ -114,12 +108,11 @@
 	      </div>
 	      <div class="modal-body">
           <div id="comparePlayersModalBodyGeneral">
-
+            <!-- General player comparison filled with JS & plot.ly -->
           </div>
           <div id="comparePlayersModalBodyPerGame">
-
+           <!-- Average players pergame comparison filled with JS & plot.ly -->
           </div>
-         
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -127,9 +120,34 @@
 	    </div>
 	  </div>
   </div>
-  <script src="./js/script.js"></script>
 
-  
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" 
+          integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" 
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+          integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" 
+          crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+          integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
+          crossorigin="anonymous"></script>
+  <script type="text/javascript" 
+          charset="utf8" 
+          src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" 
+          charset="utf8" 
+          src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <script type="text/javascript" 
+          charset="utf8" 
+          src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+  <script type="text/javascript" 
+          charset="utf8" 
+          src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+  <script type="text/javascript" 
+          charset="utf8" 
+          src="./js/bootbox.all.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="./js/all.js"></script>
+  <script src="./js/script.js"></script>
 </body>
 </html>
 
