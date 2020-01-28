@@ -320,6 +320,7 @@ function FiltrirajUtakmice()
   }
 }
 
+var index = -1;
 var players = [];
 var tablePlayersScore = undefined;
 var tablePlayers = undefined;
@@ -362,6 +363,15 @@ function FiltrirajIgraceKluba(broj)
   requestPlayers.onload = function() {
     var playersAll = requestPlayers.response;
     players = playersAll['league']['standard'];
+    players.forEach(player => {
+      if(player.teamId == "")
+      {
+        index = players.indexOf(player);
+        if (index > -1) {
+          delete players[index];
+        }
+      }
+    });
     switch(broj) {
       case 1:
           ///////////////////////////////////////////////// Filtriraj igrace Kluba -> Club Modal
